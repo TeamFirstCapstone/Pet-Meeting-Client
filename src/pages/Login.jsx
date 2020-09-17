@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Login.css";
+import "./Login.scss";
 import Logo from "../images/logo.png";
 import imgBackground from "../images/login_background.png";
 
@@ -84,7 +84,7 @@ class Login extends Component {
   render() {
     const { login_error } = this.state;
     return (
-      <div className="login">
+      <div id="login">
         <img className="logo" src={Logo} alt="" />
         <div className="signin">
           <div className="title">Log in</div>
