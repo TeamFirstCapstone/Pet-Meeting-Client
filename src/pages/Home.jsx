@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Home.scss";
 import { Link } from "react-router-dom";
 import imgBackground from "../images/home_background.png";
-import Logo from "../images/logo.png";
+import Logo from "../components/Logo";
 
 class HomePage extends Component {
   constructor(props) {
@@ -19,9 +19,7 @@ class HomePage extends Component {
     return (
       <div id="home">
         <nav>
-          <Link to="/" className="logo">
-            <img src={Logo} alt="" />
-          </Link>
+          <Logo />
           <ul>
             <li className="home">Home</li>
             <li className="about">About</li>
