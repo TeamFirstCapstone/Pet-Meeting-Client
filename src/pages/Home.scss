@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Sail&display=swap");
+
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+#home {
+  nav {
+    margin: 10px 20px 20px 20px;
+    &,
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    ul {
+      width: 400px;
+      margin-right: 40px;
+      li {
+        cursor: pointer;
+      }
+    }
+
+    .signin {
+      background-color: #0075ff;
+      width: 110px;
+      height: 40px;
+      text-align: center;
+      border-radius: 36px;
+      line-height: 36px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: #024da1;
+        transition: 0.3s;
+      }
+      *:visited {
+        color: white;
+      }
+    }
+  }
+  main {
+    font-family: "Sail", cursive;
+    .title {
+      position: absolute;
+      left: 28%;
+      top: 200px;
+      font-size: 45px;
+      line-height: 58px;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+    .subtitle {
+      position: absolute;
+      left: 28%;
+      top: 430px;
+      font-size: 30px;
+      line-height: 40px;
+      transform: translate(-50%, -50%);
+      color: #f09333;
+    }
+  }
+
+  .home_background {
+    position: absolute;
+    height: 90%;
+    right: 50px;
+    bottom: 0;
+    z-index: -1;
+  }
+}
