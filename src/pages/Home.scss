@@ -18,10 +18,16 @@
     ul {
       width: 400px;
       margin-right: 40px;
+      li {
+        cursor: pointer;
+      }
     }
 
     .logo {
       height: 35px;
+      img {
+        height: 100%;
+      }
     }
 
     .signin {
@@ -33,6 +39,14 @@
       line-height: 36px;
       font-size: 18px;
       color: white;
+      cursor: pointer;
+      &:hover {
+        background-color: #024da1;
+        transition: 0.3s;
+      }
+      *:visited {
+        color: white;
+      }
     }
   }
   main {

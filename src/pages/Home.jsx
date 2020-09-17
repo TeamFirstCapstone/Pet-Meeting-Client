@@ -19,15 +19,16 @@ class HomePage extends Component {
     return (
       <div id="home">
         <nav>
-          <img src={Logo} alt="" className="logo" />
+          <Link to="/" className="logo">
+            <img src={Logo} alt="" />
+          </Link>
           <ul>
             <li className="home">Home</li>
             <li className="about">About</li>
             <li className="contact">Contact</li>
           </ul>
           <div className="signin">
-            Signin
-            <Link to="/login" />
+            <Link to="/login">Signin</Link>
           </div>
         </nav>
         <main>
