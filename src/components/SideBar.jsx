@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PersonCard from "./PersonCard";
 import PetCard from "./PetCard";
 import "./SideBar.scss";
+import mock from "../mocks/Sidebar";
 
 class SideBar extends Component {
   constructor(props) {
@@ -10,20 +11,6 @@ class SideBar extends Component {
       width: "30%",
     };
   }
-
-  pet_data = {
-    name: "Rosemary",
-    year: 8,
-    gender: "female",
-    species: "Singapura cat",
-    imgUrl: "http://localhost:4000/img/sample.png",
-  };
-  person_data = {
-    name: "Rosemary",
-    text: `What did you do yesterday? \
-            I don’t know what I have...`,
-    imgUrl: "http://localhost:4000/img/sample.png",
-  };
 
   render() {
     const data = this.data;
