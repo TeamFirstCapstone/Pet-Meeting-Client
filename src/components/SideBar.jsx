@@ -2,22 +2,51 @@ import React, { Component } from "react";
 import PersonCard from "./PersonCard";
 import PetCard from "./PetCard";
 import "./SideBar.scss";
-import mock from "../mocks/Sidebar";
+import { BASE_URL } from "../config/url";
 
 class SideBar extends Component {
   constructor(props) {
     super();
     this.state = {
-      width: "30%",
+      id: props.id,
+      user: null,
+      pets: [],
+      chats: [],
     };
+
+    fetch(BASE_URL + "/profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: this.state.id }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json.result);
+        return json.status ? this.setState(json.result) : null;
+      });
   }
 
   render() {
-    const data = this.data;
+    const { user, pets, chats } = this.state;
     return (
-      <div>
-        <PersonCard {...this.person_data}></PersonCard>
-      </div>
+      <nav id="sidebar">
+        <div className="topbar">
+          <i className="fas fa-bars"></i>
+          <div className="title">Pet Meeting</div>
+        </div>
+        <div className="profile"></div>
+        <div className="pets">
+          <div className="top">
+            <div className="div">Lover</div>
+            <i className="fas fa-plus"></i>
+          </div>
+          <div className="pets_main">
+            {pets.map((pet) => (
+              <PetCard {...pet}></PetCard>
+            ))}
+          </div>
+        </div>
+      </nav>
     );
   }
 }

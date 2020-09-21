@@ -27,9 +27,9 @@ class PetCard extends Component {
             <div className="year">{year} years old</div>
             <div className="gender">
               {gender === "female" ? (
-                <i class="fas fa-venus female"></i>
+                <i className="fas fa-venus female"></i>
               ) : (
-                <i class="fas fa-mars male"></i>
+                <i className="fas fa-mars male"></i>
               )}
             </div>
           </div>

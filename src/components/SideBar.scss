@@ -1,0 +1,23 @@
+#sidebar {
+  width: 15vw;
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+
+  min-width: 170px;
+
+  .topbar {
+    font-size: 1.5em;
+    display: flex;
+    margin-left: 10px;
+    .fas {
+      margin: auto;
+    }
+    .title {
+      flex: 1;
+      font-size: 1.3em;
+      font-family: Risque, "san-sarif";
+      text-align: center;
+    }
+  }
+}
