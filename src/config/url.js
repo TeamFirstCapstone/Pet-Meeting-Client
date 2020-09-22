@@ -1,3 +1,3 @@
 module.exports = {
-  BASE_URL: "pet.kaonmir.xyz",
+  BASE_URL: "http://pet.kaonmir.xyz",
 };
