@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import "./Home.scss";
 import { Link } from "react-router-dom";
-import imgBackground from "../images/home_background.png";
+import imgPage1 from "../images/page1.png";
+import imgPage2 from "../images/page2.png";
+import imgPage3 from "../images/page3.png";
+import imgSonSunghun from "../images/SonSunghun.jpg";
 import Logo from "../components/Logo";
 
 class HomePage extends Component {
@@ -10,33 +13,83 @@ class HomePage extends Component {
     this.state = {
       username: null,
       password: null,
+      top: "10vh",
     };
   }
 
-  submit() {}
-
   render() {
+    const { top } = this.state;
     return (
       <div id="home">
         <nav>
           <Logo />
           <ul>
-            <li className="home">Home</li>
-            <li className="about">About</li>
-            <li className="contact">Contact</li>
+            <li className="home" onClick={() => this.setState({ top: "10vh" })}>
+              Home
+            </li>
+            <li
+              className="about"
+              onClick={() => this.setState({ top: "-90vh" })}
+            >
+              About
+            </li>
+            <li
+              className="contact"
+              onClick={() => this.setState({ top: "-190vh" })}
+            >
+              Contact
+            </li>
           </ul>
           <div className="signin">
             <Link to="/login">Signin</Link>
           </div>
         </nav>
-        <main>
-          <div className="title">
-            Give your pet <br />
-            perfect experience
+        <main style={{ top: top }}>
+          <div className="page1">
+            <div className="title">
+              Give your pet <br />
+              perfect experience
+            </div>
+            <div className="subtitle">Entrust your Lover</div>
+            <img className="background" src={imgPage1} alt="" />
           </div>
-          <div className="subtitle">Entrust your Lover</div>
+
+          <div className="page2">
+            <div className="title">
+              Do you want to entrust your pet for free?
+              <br />
+              Or
+              <br />
+              Do you want to grow your favorite pet for a while?
+            </div>
+            <div className="subtitle">
+              We can give you a perfect experience <br /> whatever you want
+            </div>
+            <img src={imgPage2} alt="" className="background" />
+          </div>
+          <div className="page3">
+            <div className="profile">
+              <img src={imgSonSunghun} alt="" />
+              <p>
+                Son sunghun <br /> ChungAng Univ. <br /> sonjeff@naver.com
+              </p>
+            </div>
+            <div className="profile">
+              <img src={imgSonSunghun} alt="" />
+              <p>
+                Son sunghun <br /> ChungAng Univ. <br /> sonjeff@naver.com
+              </p>
+            </div>
+            <div className="profile">
+              <img src={imgSonSunghun} alt="" />
+              <p>
+                Son sunghun <br /> ChungAng Univ. <br /> sonjeff@naver.com
+              </p>
+            </div>
+
+            <img src={imgPage3} alt="" className="background" />
+          </div>
         </main>
-        <img className="home_background" src={imgBackground} alt="" />
       </div>
     );
   }
