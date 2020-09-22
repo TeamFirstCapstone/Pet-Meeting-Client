@@ -1,17 +1,19 @@
 import React, { Component } from "react";
-import "./Login.scss";
-import { login, login_status } from "../services/login";
+import "./Signup.scss";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
 import { Link, useHistory } from "react-router-dom";
+import { signup, signup_status } from "../services/signup";
 
-class Login extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      login_error: "",
+      email: "",
+      phone: "",
+      signup_error: "",
     };
   }
 
@@ -19,19 +21,20 @@ class Login extends Component {
     this.setState({ [event.target.name]: event.target.value });
 
   submit = (event) => {
-    const { username, password } = this.state;
+    const { username, password, email, phone } = this.state;
 
-    if (username === "") this.setState({ login_error: "username is null" });
+    if (username === "") this.setState({ signup_error: "username is null" });
     else if (password === "")
-      this.setState({ login_error: "password is null" });
+      this.setState({ signup_error: "password is null" });
     else {
-      login(username, password).then((result) => {
-        if (result === login_status.success) {
+      // return result which is one of login_status string
+      signup(username, password, email, phone).then((result) => {
+        if (result === signup_status.success) {
           const history = useHistory();
-          history.push("/main");
-        } else if (result === login_status.login_fail)
-          this.setState({ login_error: "login failed" });
-        else if (result === login_status.server_error) console.log(result);
+          history.push("/login");
+        } else if (result === signup_status.login_fail)
+          this.setState({ signup_error: "login failed" });
+        else if (result === signup_status.server_error) console.log(result);
       });
     }
   };
@@ -41,12 +44,12 @@ class Login extends Component {
     if (code === 13) this.submit();
   };
   render() {
-    const { login_error } = this.state;
+    const { signup_error } = this.state;
     return (
       <div id="login">
         <Logo />
         <div className="signin">
-          <div className="title">Log in</div>
+          <div className="title">Sign up</div>
           <div className="box">
             <input
               type="text"
@@ -64,14 +67,27 @@ class Login extends Component {
               onChange={this.handlechange}
               onKeyPress={this.enterPressed}
             ></input>
-            <Link className="signup" to="signup">
-              Register
-            </Link>
+            <input
+              type="text"
+              name="email"
+              placeholder="email"
+              value={this.state.email}
+              onChange={this.handlechange}
+              onKeyPress={this.enterPressed}
+            ></input>
+            <input
+              type="text"
+              name="phone"
+              placeholder="phone"
+              value={this.state.phone}
+              onChange={this.handlechange}
+              onKeyPress={this.enterPressed}
+            ></input>
             <button className="submit" onClick={this.submit}>
               Submit
             </button>
             {(function () {
-              switch (login_error) {
+              switch (signup_error) {
                 case "username is null":
                   return (
                     <div className="login_error">
@@ -93,7 +109,7 @@ class Login extends Component {
                 default:
                   return null;
               }
-            })(login_error)}
+            })(signup_error)}
           </div>
         </div>
         <img className="background" src={imgBackground} alt="" />
@@ -102,13 +118,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
-
-/*
-#4dff4d
-#36b336
-#4dffff
-#b8ff4d
-#81b336
-https://colors.muz.li/palette/4dff4d/36b336/4dffff/b8ff4d/81b336
-*/
+export default Signup;
