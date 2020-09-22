@@ -16,8 +16,7 @@ function login(username, password) {
     .then((json) => {
       if (json.status === true) return login_status.success;
       else return login_status[json.message];
-    })
-    .catch((error) => console.log(error));
+    });
 }
 
 module.exports = {

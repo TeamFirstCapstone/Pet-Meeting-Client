@@ -25,14 +25,21 @@ class Login extends Component {
     else if (password === "")
       this.setState({ login_error: "password is null" });
     else {
-      login(username, password).then((result) => {
-        if (result === login_status.success) {
-          const history = useHistory();
-          history.push("/main");
-        } else if (result === login_status.login_fail)
-          this.setState({ login_error: "login failed" });
-        else if (result === login_status.server_error) console.log(result);
-      });
+      login(username, password)
+        .then((result) => {
+          if (result === login_status.success) {
+            alert("Login successful");
+            // const history = useHistory();
+            // history.push("/main");
+          } else if (result === login_status.login_fail) {
+            this.setState({ login_error: "login failed" });
+            alert("Login fail check more");
+          } else if (result === login_status.server_error) console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Server Error!");
+        });
     }
   };
 
