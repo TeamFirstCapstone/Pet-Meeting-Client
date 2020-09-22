@@ -63,7 +63,7 @@
   }
   .box input:hover,
   .box input:focus {
-    width: 300px;
+    width: 250px;
     transition: 0.6s;
   }
 
@@ -73,11 +73,25 @@
     letter-spacing: 1px;
     color: gray;
   }
+
+  .box .signup {
+    font-size: 10px;
+    text-decoration: none;
+    color: black;
+    width: 200px;
+    margin-top: 4px;
+    text-align: end;
+  }
+  .box .signup:hover {
+    cursor: pointer;
+    color: gray;
+  }
+
   .box button {
     width: 100px;
 
     border-radius: 13px;
-    margin-top: 20px;
+    margin-top: 10px;
 
     background-color: #ffa74e;
     color: black;

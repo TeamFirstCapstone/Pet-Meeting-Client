@@ -3,7 +3,7 @@ import "./Login.scss";
 import { login, login_status } from "../services/login";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Login extends Component {
       password: "",
       login_error: "",
     };
-    this.history = useHistory();
   }
 
   handlechange = (event) =>
@@ -28,8 +27,8 @@ class Login extends Component {
     else {
       login(username, password).then((result) => {
         if (result === login_status.success) {
-          alert("Login Successful!");
-          this.history.push("/main");
+          const history = useHistory();
+          history.push("/main");
         } else if (result === login_status.login_fail)
           this.setState({ login_error: "login failed" });
         else if (result === login_status.server_error) console.log(result);
@@ -65,6 +64,9 @@ class Login extends Component {
               onChange={this.handlechange}
               onKeyPress={this.enterPressed}
             ></input>
+            <Link className="signup" to="signup">
+              Register
+            </Link>
             <button className="submit" onClick={this.submit}>
               Submit
             </button>
