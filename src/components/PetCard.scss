@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding-left: 5%;
+    padding-left: 8%;
 
     font-family: Risque, "san-sarif";
 
@@ -35,6 +35,7 @@
     .yeargender {
       display: flex;
       justify-content: space-between;
+      font-size: 1.2em;
       .male {
         color: blue;
       }

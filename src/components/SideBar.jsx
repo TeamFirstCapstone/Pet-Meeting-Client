@@ -9,7 +9,7 @@ class SideBar extends Component {
     super();
     this.state = {
       id: props.id,
-      user: null,
+      user: {},
       pets: [],
       chats: [],
     };
@@ -34,15 +34,35 @@ class SideBar extends Component {
           <i className="fas fa-bars"></i>
           <div className="title">Pet Meeting</div>
         </div>
-        <div className="profile"></div>
+        <div className="profile">
+          <img className="profileImg" src={user.imgUrl} alt="" />
+          <div className="box">
+            <div className="name">{user.name}</div>
+            <div className="setting">
+              <div className="profileButton">Profile</div>
+              <div className="settingButton">Setting</div>
+            </div>
+          </div>
+        </div>
         <div className="pets">
           <div className="top">
-            <div className="div">Lover</div>
+            <div className="subtitle">Lover</div>
             <i className="fas fa-plus"></i>
           </div>
           <div className="pets_main">
             {pets.map((pet) => (
               <PetCard {...pet}></PetCard>
+            ))}
+          </div>
+        </div>
+        <div className="chats">
+          <div className="top">
+            <div className="subtitle">Chat</div>
+            <i className="fas fa-plus"></i>
+          </div>
+          <div className="chats_main">
+            {chats.map((chat) => (
+              <PersonCard {...chat}></PersonCard>
             ))}
           </div>
         </div>
