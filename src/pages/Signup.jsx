@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Signup.scss";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { signup, signup_status } from "../services/signup";
 
 class Signup extends Component {
@@ -28,14 +28,21 @@ class Signup extends Component {
       this.setState({ signup_error: "password is null" });
     else {
       // return result which is one of login_status string
-      signup(username, password, email, phone).then((result) => {
-        if (result === signup_status.success) {
-          const history = useHistory();
-          history.push("/login");
-        } else if (result === signup_status.login_fail)
-          this.setState({ signup_error: "login failed" });
-        else if (result === signup_status.server_error) console.log(result);
-      });
+      signup(username, password, email, phone)
+        .then((result) => {
+          if (result === signup_status.success) {
+            alert("Signup successful");
+            // const history = useHistory();
+            // history.push("/login");
+          } else if (result === signup_status.login_fail) {
+            alert("Login fail check more");
+            this.setState({ signup_error: "login failed" });
+          } else if (result === signup_status.server_error) console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Server Error!");
+        });
     }
   };
 

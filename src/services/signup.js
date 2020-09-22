@@ -21,8 +21,7 @@ function signup(username, password, email, phone) {
     .then((json) => {
       if (json.status === true) return signup_status.success;
       else return signup_status[json.message];
-    })
-    .catch((error) => console.log(error));
+    });
 }
 
 module.exports = {
