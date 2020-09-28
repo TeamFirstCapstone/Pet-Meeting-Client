@@ -10,12 +10,33 @@ import Logo from "../components/Logo";
 class HomePage extends Component {
   constructor(props) {
     super();
+
+    this.pageOffset = {
+      first: "10vh",
+      second: "-90vh",
+      third: "-190vh",
+    };
+
     this.state = {
       username: null,
       password: null,
-      top: "10vh",
+      top: this.pageOffset.first,
     };
   }
+
+  componentDidMount = () => {
+    window.addEventListener("wheel", (e) => {
+      const { top } = this.state;
+      const { first, second, third } = this.pageOffset;
+      if (e.wheelDeltaY < 0) {
+        if (top === first) this.setState({ top: second });
+        if (top === second) this.setState({ top: third });
+      } else {
+        if (top === second) this.setState({ top: first });
+        if (top === third) this.setState({ top: second });
+      }
+    });
+  };
 
   render() {
     const { top } = this.state;
@@ -24,18 +45,21 @@ class HomePage extends Component {
         <nav>
           <Logo />
           <ul>
-            <li className="home" onClick={() => this.setState({ top: "10vh" })}>
+            <li
+              className="home"
+              onClick={() => this.setState({ top: this.pageOffset.first })}
+            >
               Home
             </li>
             <li
               className="about"
-              onClick={() => this.setState({ top: "-90vh" })}
+              onClick={() => this.setState({ top: this.pageOffset.second })}
             >
               About
             </li>
             <li
               className="contact"
-              onClick={() => this.setState({ top: "-190vh" })}
+              onClick={() => this.setState({ top: this.pageOffset.third })}
             >
               Contact
             </li>
