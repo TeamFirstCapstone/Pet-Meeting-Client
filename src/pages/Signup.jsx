@@ -3,7 +3,7 @@ import "./Signup.scss";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
 import { useHistory } from "react-router-dom";
-import { signup, signup_status } from "../services/signup";
+import { logined, signup, signup_status } from "../services/user";
 
 class Signup extends Component {
   constructor(props) {
@@ -15,6 +15,8 @@ class Signup extends Component {
       phone: "",
       signup_error: "",
     };
+    this.history = props.history;
+    logined().then((status) => (status ? this.history.push("/main") : null));
   }
 
   handlechange = (event) =>
@@ -30,11 +32,8 @@ class Signup extends Component {
       // return result which is one of login_status string
       signup(username, password, email, phone)
         .then((result) => {
-          if (result === signup_status.success) {
-            alert("Signup successful");
-            // const history = useHistory();
-            // history.push("/login");
-          } else if (result === signup_status.login_fail) {
+          if (result === signup_status.success) this.history.push("/login");
+          else if (result === signup_status.login_fail) {
             alert("Login fail check more");
             this.setState({ signup_error: "login failed" });
           } else if (result === signup_status.server_error) console.log(result);

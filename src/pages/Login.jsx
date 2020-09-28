@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./Login.scss";
-import { login, login_status } from "../services/login";
+import { login, login_status } from "../services/user";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
 import { Link } from "react-router-dom";
+import { logined } from "../services/user";
+import { BASE_URL } from "../config/url";
 
 class Login extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class Login extends Component {
       password: "",
       login_error: "",
     };
+    logined().then((status) => (this.logined = status));
   }
 
   handlechange = (event) =>
@@ -29,12 +32,8 @@ class Login extends Component {
     else {
       login(username, password)
         .then((result) => {
-          if (result === login_status.success) {
-            // TODO id 위로 올리기
-
-            this.history.push("/main");
-            return;
-          } else if (result === login_status.login_fail) {
+          if (result === login_status.success) this.history.push("/main");
+          else if (result === login_status.login_fail) {
             this.setState({ login_error: "login failed" });
             alert("Login fail check more");
           } else if (result === login_status.server_error) console.log(result);

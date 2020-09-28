@@ -22,3 +22,8 @@ function App() {
 }
 
 export default App;
+
+/** 
+  handlechange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+*/

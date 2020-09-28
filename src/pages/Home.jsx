@@ -3,19 +3,17 @@ import "./Home.scss";
 import { Link } from "react-router-dom";
 import imgBackground from "../images/home_background.png";
 import Logo from "../components/Logo";
+import user from "../services/user";
 
 class HomePage extends Component {
   constructor(props) {
     super();
-    this.state = {
-      username: null,
-      password: null,
-    };
+    this.logined = false;
+    user.logined().then((status) => (this.logined = status));
   }
 
-  submit() {}
-
   render() {
+    console.log(this.logined);
     return (
       <div id="home">
         <nav>
@@ -26,7 +24,7 @@ class HomePage extends Component {
             <li className="contact">Contact</li>
           </ul>
           <div className="signin">
-            <Link to="/login">Signin</Link>
+            <Link to={this.logined ? "/main" : "/login"}>Signin</Link>
           </div>
         </nav>
         <main>
