@@ -3,11 +3,13 @@ import "./Login.scss";
 import { login, login_status } from "../services/login";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.history = props.history;
     this.state = {
       username: "",
       password: "",
@@ -28,9 +30,10 @@ class Login extends Component {
       login(username, password)
         .then((result) => {
           if (result === login_status.success) {
-            alert("Login successful");
-            // const history = useHistory();
-            // history.push("/main");
+            // TODO id 위로 올리기
+
+            this.history.push("/main");
+            return;
           } else if (result === login_status.login_fail) {
             this.setState({ login_error: "login failed" });
             alert("Login fail check more");

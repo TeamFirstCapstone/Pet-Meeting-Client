@@ -7,10 +7,12 @@ const login_status = {
 };
 
 function login(username, password) {
-  return fetch(BASE_URL + "/login", {
+  return fetch(BASE_URL + "/user/login", {
     method: "post",
-    headers: { "Content-Type": "application/json; charset=UTF-8" },
-    body: JSON.stringify({ username: username, password: password }),
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+    },
+    body: `username=${username}&password=${password}`,
   })
     .then((res) => res.json())
     .then((json) => {
