@@ -5,7 +5,6 @@ import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
 import { Link } from "react-router-dom";
 import { logined } from "../services/user";
-import { BASE_URL } from "../config/url";
 
 class Login extends Component {
   constructor(props) {
@@ -17,7 +16,7 @@ class Login extends Component {
       password: "",
       login_error: "",
     };
-    logined().then((status) => (this.logined = status));
+    logined().then(({ status }) => (this.logined = status));
   }
 
   handlechange = (event) =>

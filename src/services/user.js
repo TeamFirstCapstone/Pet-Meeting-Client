@@ -6,10 +6,18 @@ const login_status = {
   server_error: "server_error",
 };
 
+const signup_status = {
+  success: "success",
+  login_fail: "signup_fail",
+  server_error: "server_error",
+};
+
 function logined() {
   return fetch(BASE_URL + "/user/logined", { method: "get" })
     .then((res) => res.json())
-    .then((json) => json.status);
+    .then((json) => {
+      return { status: json.status, result: json.result };
+    });
 }
 
 function login(username, password) {
@@ -26,12 +34,6 @@ function login(username, password) {
       else return login_status[json.message];
     });
 }
-
-const signup_status = {
-  success: "success",
-  login_fail: "signup_fail",
-  server_error: "server_error",
-};
 
 function signup(username, password, email, phone) {
   return fetch(BASE_URL + "/user/signup", {

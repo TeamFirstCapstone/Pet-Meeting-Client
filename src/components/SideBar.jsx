@@ -7,8 +7,9 @@ import { BASE_URL } from "../config/url";
 class SideBar extends Component {
   constructor(props) {
     super();
+
+    this.id = props.id;
     this.state = {
-      id: props.id,
       user: {},
       pets: [],
       chats: [],
@@ -17,13 +18,10 @@ class SideBar extends Component {
     fetch(BASE_URL + "/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: this.state.id }),
+      body: JSON.stringify({ id: this.id }),
     })
       .then((res) => res.json())
-      .then((json) => {
-        console.log(json.result);
-        return json.status ? this.setState(json.result) : null;
-      });
+      .then((json) => (json.status ? this.setState(json.result) : null));
   }
 
   render() {

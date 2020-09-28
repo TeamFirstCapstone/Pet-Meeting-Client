@@ -9,7 +9,7 @@ class HomePage extends Component {
   constructor(props) {
     super();
     this.logined = false;
-    user.logined().then((status) => (this.logined = status));
+    user.logined().then(({ status }) => (this.logined = status));
   }
 
   render() {
