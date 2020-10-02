@@ -17,23 +17,23 @@ class PetCard extends Component {
   }
 
   render() {
-    const { name, year, gender, species, imgUrl } = this.state;
+    const { Name, Year, Gender, Species, ImgUrl } = this.state;
     return (
       <div id="petCard">
-        <img className="profileImg" alt="home" src={imgUrl}></img>
+        <img className="profileImg" alt="home" src={ImgUrl}></img>
         <div className="box">
-          <div className="name">{name}</div>
+          <div className="name">{Name}</div>
           <div className="yeargender">
-            <div className="year">{year} years old</div>
+            <div className="year">{Year} years old</div>
             <div className="gender">
-              {gender === "female" ? (
+              {Gender === "female" ? (
                 <i className="fas fa-venus female"></i>
               ) : (
                 <i className="fas fa-mars male"></i>
               )}
             </div>
           </div>
-          <div className="species">{species}</div>
+          <div className="species">{Species}</div>
         </div>
       </div>
     );

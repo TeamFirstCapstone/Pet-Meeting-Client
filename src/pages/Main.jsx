@@ -17,7 +17,9 @@ class MainPage extends Component {
     // });
   }
 
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    logined().then((status) => console.log(status));
+  };
 
   render() {
     return (
