@@ -16,7 +16,7 @@ class Login extends Component {
       password: "",
       login_error: "",
     };
-    logined().then(({ status }) => (this.logined = status));
+    logined().then((status) => (this.logined = status));
   }
 
   handlechange = (event) =>

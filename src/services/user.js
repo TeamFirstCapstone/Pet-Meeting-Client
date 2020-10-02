@@ -13,10 +13,12 @@ const signup_status = {
 };
 
 function logined() {
-  return fetch(BASE_URL + "/user/logined", { method: "get" })
+  return fetch(`${BASE_URL}/user/logined`, {
+    method: "GET",
+  })
     .then((res) => res.json())
     .then((json) => {
-      return { status: json.status, result: json.result };
+      return json.status;
     });
 }
 

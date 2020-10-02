@@ -16,9 +16,7 @@ class Signup extends Component {
       signup_error: "",
     };
     this.history = props.history;
-    logined().then(({ status }) =>
-      status ? this.history.push("/main") : null
-    );
+    logined().then((status) => (status ? this.history.push("/main") : null));
   }
 
   handlechange = (event) =>
