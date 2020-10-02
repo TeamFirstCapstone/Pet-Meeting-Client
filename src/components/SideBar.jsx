@@ -16,9 +16,8 @@ class SideBar extends Component {
     };
 
     fetch(BASE_URL + "/profile", {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: this.id }),
     })
       .then((res) => res.json())
       .then((json) => (json.status ? this.setState(json.result) : null));
