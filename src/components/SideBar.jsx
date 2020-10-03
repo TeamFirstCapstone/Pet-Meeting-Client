@@ -5,15 +5,15 @@ import "./SideBar.scss";
 import { BASE_URL } from "../config/url";
 
 class SideBar extends Component {
-  constructor(props) {
+  constructor() {
     super();
-
     this.state = {
       user: {},
       pets: [],
       chats: [],
     };
-
+  }
+  componentDidMount() {
     fetch(BASE_URL + "/profile", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -21,7 +21,6 @@ class SideBar extends Component {
       .then((res) => res.json())
       .then((json) => (json.status ? this.setState(json.result) : null));
   }
-
   render() {
     const { user, pets, chats } = this.state;
     return (

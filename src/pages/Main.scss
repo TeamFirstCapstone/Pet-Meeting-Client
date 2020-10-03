@@ -87,6 +87,7 @@
       height: 200px;
       background-color: #cccccc;
       border-radius: 20px;
+      padding-bottom: 15px;
       .menu {
         display: flex;
         padding: 5px 18px;
@@ -127,13 +128,15 @@
             overflow: hidden;
             text-overflow: ellipsis;
             transform: translateY(-50%);
+            font-size: 1.1em;
           }
         }
       }
       .ago {
-        font-size: 0.7em;
-        text-align: end;
-        margin: 0 20px 3px 20px;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 0.8em;
       }
     }
   }

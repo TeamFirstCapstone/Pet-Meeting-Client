@@ -8,14 +8,14 @@ class PersonCard extends Component {
       src: null,
       ...props,
     };
-
-    fetch(props.imgUrl)
+  }
+  componentDidMount() {
+    fetch(this.state.imgUrl)
       .then((res) => res.blob())
       .then((blob) => {
         this.setState({ src: URL.createObjectURL(blob) });
       });
   }
-
   render() {
     const { Name, Text, ImgUrl } = this.state;
     return (

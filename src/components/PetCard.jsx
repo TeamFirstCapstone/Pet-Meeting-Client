@@ -8,7 +8,8 @@ class PetCard extends Component {
       src: null,
       ...props,
     };
-
+  }
+  componentDidMount() {
     fetch(this.props.imgUrl)
       .then((res) => res.blob())
       .then((blob) => {

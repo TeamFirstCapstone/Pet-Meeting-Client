@@ -2,16 +2,36 @@ import React, { Component } from "react";
 import "./Main.scss";
 import SideBar from "../components/SideBar";
 import { Link } from "react-router-dom";
-import { getWorries } from "../services/profile";
+import { BASE_URL } from "../config/url";
+import timeSince from "../services/timeSince";
 
 class MainPage extends Component {
   constructor(props) {
     super();
+    this.state = {
+      worries: [],
+      showoff: {},
+    };
+  }
 
-    // 로그인 여부를 확인해야 한다..
+  componentDidMount() {
+    fetch(BASE_URL + "/worry?limit=4", { method: "GET" })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.status) this.setState({ worries: json.result });
+        else console.log(json.message);
+      });
+    fetch(BASE_URL + "/showoff", { method: "GET" })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json.showoff);
+        if (json.status) this.setState({ showoff: json.result });
+        else console.log(json.message);
+      });
   }
 
   render() {
+    const { worries, showoff } = this.state;
     return (
       <div id="main">
         <SideBar />
@@ -30,54 +50,33 @@ class MainPage extends Component {
               <i className="fas fa-plus"></i>
             </div>
             <div className="main">
-              <div className="item">
-                <div className="text">
-                  afdsoasfafsda adsfnsaipfnsa pfnsai fn isadnfisna in
-                  pfsafsdafjdasdfjsadjposdjapofjapogjwapoignpwiasknadnspfnegniwogbip
+              {worries.map((worry, idx) => (
+                <div className="item" key={idx}>
+                  <div className="text">{worry.Title}</div>
+                  <div className="author">{worry.Username}</div>
                 </div>
-                <div className="author">lnsfad</div>
-              </div>
-              <div className="item">
-                <div className="text">afdsoasdfasdfsafjd</div>
-                <div className="author">lnsfaasfdfsfd</div>
-              </div>
-              <div className="item">
-                <div className="text">afdsojasdfsadfd</div>
-                <div className="author">lnsfad</div>
-              </div>
-              <div className="item">
-                <div className="text">afdsojqjtejad</div>
-                <div className="author">lnsfad</div>
-              </div>
-              {/** 여기다가 for문 돌려야 한다.*/}
+              ))}
             </div>
           </div>
           <div className="showoff">
             <div className="menu">
               <div className="title">Show off your pets</div>
-              <i class="fas fa-plus"></i>
+              <i className="fas fa-plus"></i>
             </div>
             <div className="main">
               <div className="thumbnail">
                 <div
                   className="img"
                   style={{
-                    backgroundImage:
-                      "url(https://i.picsum.photos/id/112/300/300.jpg?hmac=y4hDL5pLR28SnzKfKdmo_YfoNGpMGheIutNh7X2YRbU)",
+                    backgroundImage: `url(${showoff.ImgUrl})`,
                   }}
                 ></div>
               </div>
               <div className="textbox">
-                <div className="text">
-                  asfasffasfsda oiasdfipsaioa pfasdfsdasdfsafdsaffipsai
-                  <br />
-                  oapfasdfsdfipsaioapfafsadfdsafssdfsdfipsaasfsadfasfsdafsadfsaioapfasdfsdfipsaioapfasdfsdfipsaioapfasdfsfdans
-                </div>
+                <div className="text">{showoff.Text}</div>
               </div>
-
-              {/** 여기다가 for문 돌려야 한다.*/}
             </div>
-            <div className="ago">4 month ago</div>
+            <div className="ago">{timeSince(showoff.Date)} ago</div>
           </div>
         </main>
       </div>
