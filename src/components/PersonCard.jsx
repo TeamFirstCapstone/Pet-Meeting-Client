@@ -8,22 +8,22 @@ class PersonCard extends Component {
       src: null,
       ...props,
     };
-
-    fetch(this.props.imgUrl)
+  }
+  componentDidMount() {
+    fetch(this.state.imgUrl)
       .then((res) => res.blob())
       .then((blob) => {
         this.setState({ src: URL.createObjectURL(blob) });
       });
   }
-
   render() {
-    const { name, text, imgUrl } = this.state;
+    const { Name, Text, ImgUrl } = this.state;
     return (
       <div id="petCard">
-        <img className="profileImg" alt="home" src={imgUrl}></img>
+        <img className="profileImg" alt="home" src={ImgUrl}></img>
         <div className="box">
-          <div className="name">{name}</div>
-          <div className="text">{text}</div>
+          <div className="name">{Name}</div>
+          <div className="text">{Text}</div>
         </div>
       </div>
     );

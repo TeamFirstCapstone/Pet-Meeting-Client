@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import "./Login.scss";
-import { login, login_status } from "../services/login";
+import { login, login_status } from "../services/user";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { logined } from "../services/user";
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.history = props.history;
     this.state = {
       username: "",
       password: "",
       login_error: "",
     };
+    logined().then((status) => (this.logined = status));
   }
 
   handlechange = (event) =>
@@ -27,11 +31,8 @@ class Login extends Component {
     else {
       login(username, password)
         .then((result) => {
-          if (result === login_status.success) {
-            alert("Login successful");
-            // const history = useHistory();
-            // history.push("/main");
-          } else if (result === login_status.login_fail) {
+          if (result === login_status.success) this.history.push("/main");
+          else if (result === login_status.login_fail) {
             this.setState({ login_error: "login failed" });
             alert("Login fail check more");
           } else if (result === login_status.server_error) console.log(result);

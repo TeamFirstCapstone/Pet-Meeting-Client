@@ -6,11 +6,14 @@ import imgPage2 from "../images/page2.png";
 import imgPage3 from "../images/page3.png";
 import imgSonSunghun from "../images/SonSunghun.jpg";
 import Logo from "../components/Logo";
+import user from "../services/user";
 
 class HomePage extends Component {
   constructor(props) {
     super();
-
+    this.logined = false;
+    user.logined().then((status) => (this.logined = status));
+  }
     this.pageOffset = {
       first: "10vh",
       second: "-90vh",
@@ -65,7 +68,7 @@ class HomePage extends Component {
             </li>
           </ul>
           <div className="signin">
-            <Link to="/login">Signin</Link>
+            <Link to={this.logined ? "/main" : "/login"}>Signin</Link>
           </div>
         </nav>
         <main style={{ top: top }}>

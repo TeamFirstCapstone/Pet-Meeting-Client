@@ -5,27 +5,22 @@ import "./SideBar.scss";
 import { BASE_URL } from "../config/url";
 
 class SideBar extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
-      id: props.id,
       user: {},
       pets: [],
       chats: [],
     };
-
+  }
+  componentDidMount() {
     fetch(BASE_URL + "/profile", {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: this.state.id }),
     })
       .then((res) => res.json())
-      .then((json) => {
-        console.log(json.result);
-        return json.status ? this.setState(json.result) : null;
-      });
+      .then((json) => (json.status ? this.setState(json.result) : null));
   }
-
   render() {
     const { user, pets, chats } = this.state;
     return (
@@ -35,9 +30,9 @@ class SideBar extends Component {
           <div className="title">Pet Meeting</div>
         </div>
         <div className="profile">
-          <img className="profileImg" src={user.imgUrl} alt="" />
+          <img className="profileImg" src={user.ImgUrl} alt="" />
           <div className="box">
-            <div className="name">{user.name}</div>
+            <div className="name">{user.Username}</div>
             <div className="setting">
               <div className="profileButton">Profile</div>
               <div className="settingButton">Setting</div>
@@ -50,8 +45,8 @@ class SideBar extends Component {
             <i className="fas fa-plus"></i>
           </div>
           <div className="pets_main">
-            {pets.map((pet) => (
-              <PetCard {...pet}></PetCard>
+            {pets.map((pet, idx) => (
+              <PetCard {...pet} key={idx}></PetCard>
             ))}
           </div>
         </div>
@@ -61,8 +56,8 @@ class SideBar extends Component {
             <i className="fas fa-plus"></i>
           </div>
           <div className="chats_main">
-            {chats.map((chat) => (
-              <PersonCard {...chat}></PersonCard>
+            {chats.map((chat, idx) => (
+              <PersonCard {...chat} key={idx}></PersonCard>
             ))}
           </div>
         </div>
