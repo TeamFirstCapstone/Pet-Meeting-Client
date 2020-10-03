@@ -13,7 +13,7 @@ class HomePage extends Component {
     super();
     this.logined = false;
     user.logined().then((status) => (this.logined = status));
-  }
+
     this.pageOffset = {
       first: "10vh",
       second: "-90vh",
