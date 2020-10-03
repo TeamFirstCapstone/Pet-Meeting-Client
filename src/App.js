@@ -5,6 +5,7 @@ import HomePage from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MainPage from "./pages/Main";
+import Entrust from "./pages/Entrust";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/main" component={MainPage} />
+          <Route path="/Entrust" component={Entrust} />
         </Switch>
       </BrowserRouter>
     </div>

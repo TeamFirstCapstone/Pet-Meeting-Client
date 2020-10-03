@@ -1,0 +1,41 @@
+#entrust {
+  main {
+    margin-left: 19vw;
+    position: relative;
+    width: 81vw;
+    min-width: 600px;
+    .title {
+      font-size: 2em;
+      font-weight: 600;
+    }
+    .formbox {
+      width: 70%;
+      margin: 20px auto 0 auto;
+      .name {
+        font-size: 1.2em;
+        text-align: start;
+      }
+      .pets {
+        .box {
+          display: flex;
+          margin: 15px 0 20px 20px;
+          .item {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            margin-right: 10px;
+          }
+          .plus {
+            background-color: gray;
+          }
+        }
+      }
+      .tablebox {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        grid-template-rows: auto auto auto;
+        margin: 0 30px;
+      }
+    }
+  }
+}
