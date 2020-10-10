@@ -3,11 +3,25 @@
 * {
   list-style: none;
   text-decoration: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 #home {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
   nav {
-    margin: 10px 20px 20px 20px;
+    position: sticky;
+    // background-color: white;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding: 10px 20px 5px 20px;
+    height: 10vh;
+    max-height: 60px;
     &,
     ul {
       display: flex;
@@ -25,6 +39,7 @@
 
     .signin {
       background-color: #0075ff;
+      text-decoration: none;
       width: 110px;
       height: 40px;
       text-align: center;
@@ -43,32 +58,120 @@
     }
   }
   main {
-    font-family: "Sail", cursive;
-    .title {
-      position: absolute;
-      left: 28%;
-      top: 200px;
-      font-size: 45px;
-      line-height: 58px;
-      text-align: center;
-      transform: translate(-50%, -50%);
-    }
-    .subtitle {
-      position: absolute;
-      left: 28%;
-      top: 430px;
-      font-size: 30px;
-      line-height: 40px;
-      transform: translate(-50%, -50%);
-      color: #f09333;
-    }
-  }
-
-  .home_background {
     position: absolute;
-    height: 90%;
-    right: 50px;
-    bottom: 0;
-    z-index: -1;
+    // top: -190vh;
+
+    overflow: hidden;
+    font-family: "Sail", cursive;
+    display: flex;
+    flex-direction: column;
+    height: 90vh + 100vh * 2;
+    width: 100%;
+
+    transition: 0.6s;
+    .page1 {
+      flex: 1;
+      width: 100%;
+      position: relative;
+      margin-bottom: 10vh;
+      .title {
+        position: absolute;
+        left: 28%;
+        top: 200px;
+        font-size: 45px;
+        line-height: 58px;
+        text-align: center;
+        transform: translate(-50%, -50%);
+      }
+      .subtitle {
+        position: absolute;
+        left: 28%;
+        top: 430px;
+        font-size: 30px;
+        line-height: 40px;
+        transform: translate(-50%, -50%);
+        color: #f09333;
+      }
+      .background {
+        position: absolute;
+        height: 90%;
+        right: 50px;
+        bottom: 0;
+        z-index: -1;
+      }
+    }
+    .page2 {
+      flex: 1;
+      width: 100%;
+      position: relative;
+      margin-bottom: 10vh;
+      border-bottom: 1px solid black;
+
+      .title {
+        margin-top: 50px;
+        font-size: 1.8em;
+        line-height: 1.6em;
+      }
+      .subtitle {
+        margin-top: 60px;
+        font-size: 3em;
+      }
+
+      .background {
+        position: absolute;
+        height: 250px;
+        bottom: -82px;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+    }
+    .page3 {
+      flex: 1;
+      width: 100%;
+      position: relative;
+
+      .profile {
+        position: absolute;
+        width: 140px;
+        // border: 1px solid black;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.8em;
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 100%;
+        }
+        p {
+          margin-top: 5px;
+          font-size: 1.1em;
+          line-height: 1.6em;
+          font-weight: 500;
+        }
+
+        &:first-child {
+          left: 50%;
+          top: 130px;
+          transform: translate(-50%, -50%);
+        }
+        &:nth-child(2) {
+          left: 20%;
+          top: 300px;
+          transform: translate(-50%, -50%);
+        }
+        &:nth-child(3) {
+          left: 80%;
+          top: 300px;
+          transform: translate(-50%, -50%);
+        }
+      }
+      .background {
+        position: absolute;
+        width: 300px;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+    }
   }
 }

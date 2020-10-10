@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 19vw;
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  padding: 9px 10px 0 10px;
+
+  background-color: #d3d3d3;
+
+  min-width: 200px;
+
+  .topbar {
+    display: flex;
+    margin-left: 10px;
+    .fas {
+      margin: auto;
+      font-size: 2em;
+    }
+    .title {
+      flex: 1;
+      font-size: 2.1em;
+      font-family: Risque, "san-sarif";
+      text-align: center;
+    }
+  }
+
+  .profile {
+    display: flex;
+    margin: 20px 0 20px 0;
+    .profileImg {
+      height: 5em;
+      width: 5em;
+      border-radius: 100%;
+      // border: 1px solid red;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 200%;
+      margin: auto;
+    }
+
+    .box {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding-left: 5%;
+
+      font-family: Risque, "san-sarif";
+
+      .name {
+        font-size: 1.7em;
+        padding-top: 3%;
+        width: 100%;
+        word-wrap: none;
+        overflow: hidden;
+      }
+      .setting {
+        display: flex;
+        margin-top: 8px;
+        justify-content: space-evenly;
+        color: gray;
+        font-size: 1.1em;
+        & > *:hover {
+          cursor: pointer;
+          color: rgb(87, 87, 87);
+        }
+      }
+    }
+  }
+
+  .pets {
+    margin: 20px 0 20px 0;
+    .top {
+      display: flex;
+      font-size: 1.4em;
+      .subtitle {
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+      }
+      .fas {
+        margin: auto;
+        cursor: pointer;
+      }
+    }
+  }
+  .chats {
+    margin: 20px 0 20px 0;
+    .top {
+      display: flex;
+      font-size: 1.4em;
+      .subtitle {
+        flex: 1;
+        text-align: center;
+        font-weight: 600;
+      }
+      .fas {
+        margin: auto;
+        cursor: pointer;
+      }
+    }
+  }
+}
