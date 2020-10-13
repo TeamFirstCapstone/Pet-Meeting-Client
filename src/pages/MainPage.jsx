@@ -12,20 +12,17 @@ class MainPage extends Component {
     super(props);
     this.state = {
       // main, choosing, entrust
-      page: "none",
+      page: "choosing",
       user: {
-        Username: "Son",
+        Username: "",
         ImgUrl: null,
-        UID: 1,
+        UID: 0,
       },
       chatPartner: null,
     };
   }
 
-  statechange = (state) => {
-    console.log(state);
-    this.setState(state);
-  };
+  statechange = (state) => this.setState(state);
 
   componentDidMount() {
     fetch(BASE_URL + "/user/my")
@@ -44,11 +41,11 @@ class MainPage extends Component {
     return (
       <div id="main">
         <SideBar user={user} statechange={this.statechange} />
-        {/* {page === "main" ? <Main statechange={this.statechange} /> : null}
+        {page === "main" ? <Main statechange={this.statechange} /> : null}
         {page === "choosing" ? (
           <Choosing statechange={this.statechange} />
         ) : null}
-        {page === "entrust" ? <Entrust statechange={this.statechange} /> : null} */}
+        {page === "entrust" ? <Entrust statechange={this.statechange} /> : null}
 
         {chatPartner != null ? (
           <Chat

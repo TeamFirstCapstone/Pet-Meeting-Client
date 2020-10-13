@@ -6,6 +6,11 @@
 
   display: flex;
   // border: 1px solid black;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+    background-color: rgba(128, 128, 128, 0.418);
+  }
 
   .profileImg {
     height: 4em;

@@ -19,6 +19,7 @@
   }
   #showing_block .head {
     text-align: center;
+    margin-bottom: 15px;
   }
   #pet_cards_list {
     display: grid;
@@ -162,7 +163,7 @@
         text-align: left;
       }
     }
-    .advanced_fiiltering {
+    .advanced_filtering {
       .adv_filter_head {
         font-family: Risque;
         font-size: 2em;
@@ -192,6 +193,11 @@
         letter-spacing: 0em;
         text-align: left;
       }
+    }
+
+    .filtering .clicked,
+    .advanced_filtering .clicked {
+      background-color: gray;
     }
   }
   .btn {

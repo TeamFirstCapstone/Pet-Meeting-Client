@@ -8,7 +8,6 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user,
       pets: [],
       chats: [],
     };
@@ -24,7 +23,6 @@ class SideBar extends Component {
       .then((res) => res.json())
       .then((json) => {
         if (json.status) {
-          console.log(json);
           const { pets, chats } = json.result;
           this.setState({ pets: pets, chats: chats });
         }
@@ -32,8 +30,8 @@ class SideBar extends Component {
   }
 
   render() {
-    const { user, pets, chats } = this.state;
-    const { statechange } = this.props;
+    const { pets, chats } = this.state;
+    const { user, statechange } = this.props;
     return (
       <nav id="sidebar">
         <div className="topbar">
