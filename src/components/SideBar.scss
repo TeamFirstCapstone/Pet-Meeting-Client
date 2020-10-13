@@ -8,15 +8,13 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 19vw;
+  width: 200px;
   font-size: 0.8em;
   display: flex;
   flex-direction: column;
   padding: 9px 10px 0 10px;
 
   background-color: #d3d3d3;
-
-  min-width: 200px;
 
   .topbar {
     display: flex;
@@ -30,6 +28,7 @@
       font-size: 2.1em;
       font-family: Risque, "san-sarif";
       text-align: center;
+      cursor: pointer;
     }
   }
 
