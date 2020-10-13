@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { download } from "../services/image";
 import "./PetCard.scss";
 
 class PetCard extends Component {
@@ -10,11 +11,9 @@ class PetCard extends Component {
     };
   }
   componentDidMount() {
-    fetch(this.props.imgUrl)
-      .then((res) => res.blob())
-      .then((blob) => {
-        this.setState({ src: URL.createObjectURL(blob) });
-      });
+    download(this.props.Filename).then((url) => {
+      this.setState({ ImgUrl: url });
+    });
   }
 
   render() {

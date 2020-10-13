@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { download } from "../services/image";
 import "./PersonCard.scss";
 
 class PersonCard extends Component {
@@ -10,19 +11,18 @@ class PersonCard extends Component {
     };
   }
   componentDidMount() {
-    fetch(this.state.imgUrl)
-      .then((res) => res.blob())
-      .then((blob) => {
-        this.setState({ src: URL.createObjectURL(blob) });
-      });
+    // console.log(this.props.Filename);
+    download(this.props.Filename).then((url) => {
+      this.setState({ ImgUrl: url });
+    });
   }
   render() {
-    const { Name, Text, ImgUrl } = this.state;
+    const { Username, Text, ImgUrl } = this.state;
     return (
       <div id="petCard">
         <img className="profileImg" alt="home" src={ImgUrl}></img>
         <div className="box">
-          <div className="name">{Name}</div>
+          <div className="name">{Username}</div>
           <div className="text">{Text}</div>
         </div>
       </div>

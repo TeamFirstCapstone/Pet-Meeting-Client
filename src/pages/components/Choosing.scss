@@ -1,0 +1,211 @@
+#Risque {
+  font-family: "Risque", cursive;
+}
+#Roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+#choosing_page {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  /* grid-template-columns: 200px 1fr; */
+  justify-content: center;
+  width: 81vw;
+  margin-left: 200px;
+  padding-left: 20px;
+
+  #showing_block {
+    display: block;
+  }
+  #showing_block .head {
+    text-align: center;
+  }
+  #pet_cards_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: stretch;
+    gap: 5px;
+    margin-right: 10px;
+  }
+  .petCard {
+    display: grid;
+    grid-template-rows: 3fr 10vw;
+
+    border: 1px solid;
+    box-sizing: border-box;
+    border-radius: 17px;
+    padding: 1.2em;
+
+    .pet_main_info {
+      display: flex;
+      .box {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 8%;
+        font-family: Risque, "san-sarif";
+        .profileImg {
+          height: 100px; // TODO!!
+          width: 100%;
+          border-radius: 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+        .name {
+          font-size: 1.7em;
+          font-family: Risque;
+          font-size: 2vw;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.2em;
+          letter-spacing: 0em;
+          text-align: center;
+
+          /* padding-top: 3%; */
+        }
+        .yeargender {
+          /* display: flex; */
+          /* justify-content: space-between; */
+          font-family: Risque;
+          /* font-size: 12px; */
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.4em;
+          letter-spacing: 0em;
+          text-align: center;
+
+          font-size: 1.2em;
+          .male {
+            color: blue;
+          }
+          .female {
+            color: red;
+          }
+        }
+        .species {
+          font-family: Risque;
+          font-size: 1.2em;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.4em;
+          letter-spacing: 0em;
+        }
+      }
+    }
+  }
+  .petCard .pet_main_info #ratio {
+    display: grid;
+    grid-template-rows: 17vw 1fr;
+  }
+  .petCard .pet_main_info #ratio .ratio {
+    font-family: Roboto;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4em;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+  .petCard #pet_desc_bnt {
+    display: grid;
+    grid-template-rows: 5.5vw;
+    justify-items: center;
+    /* justify-content: center; */
+    padding: 10px;
+  }
+  .petCard #pet_desc_bnt .btn_apply {
+    justify-items: center;
+    padding: 10px;
+  }
+  .petCard #pet_desc_bnt .description {
+    font-family: Risque;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4em;
+    letter-spacing: 0em;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .list {
+    position: absolute;
+    width: 17vw;
+    height: 60vh;
+    left: 80vw;
+    top: 6vh;
+
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 6px;
+    /* margin-left: auto; */
+    .filtering {
+      letter-spacing: 0em;
+      .filter_head {
+        font-family: Risque;
+        font-size: 2em;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.2em;
+        text-align: center;
+      }
+      .filter_list {
+        font-family: Roboto;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        text-align: left;
+
+        /* margin-left: auto; */
+      }
+      .filter_contents {
+        font-family: Roboto;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
+    .advanced_fiiltering {
+      .adv_filter_head {
+        font-family: Risque;
+        font-size: 2em;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.2em;
+        letter-spacing: 0em;
+        text-align: center;
+      }
+      .adv_filter_list {
+        font-family: Roboto;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: left;
+        /* margin-left: 1.0em; */
+        /* margin-right: 2.0em; */
+      }
+      .adv_filter_contents {
+        font-family: Roboto;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
+  }
+  /* .ul{
+    list-style:none;
+    } */
+  .ul {
+    list-style: none;
+  }
+}
