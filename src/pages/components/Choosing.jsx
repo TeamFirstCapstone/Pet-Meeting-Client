@@ -8,10 +8,16 @@ class Choosing extends Component {
     super(props);
     this.state = {
       pets: [],
+      filtering: {
+        Housing: [],
+        Species: [],
+        Breed: [],
+      },
     };
   }
 
   componentDidMount() {
+    // List of entrustable pet
     fetch(BASE_URL + "/entrust/pet")
       .then((res) => res.json())
       .then((json) => {
@@ -26,9 +32,14 @@ class Choosing extends Component {
           )
         ).then((pets) => this.setState({ pets: pets }));
       });
+
+    // List of filtering
+    fetch(BASE_URL + "/info/list")
+      .then((res) => res.json())
+      .then((json) => this.setState({ filtering: json.result }));
   }
   render() {
-    const { pets } = this.state;
+    const { pets, filtering } = this.state;
     return (
       <div id="choosing_page">
         {/* <!-- <div className="head">
@@ -55,7 +66,7 @@ class Choosing extends Component {
                     <div className="species">{pet.Breed}</div>
                   </div>
 
-                  <div id="ratio">
+                  <div className="ratio">
                     <div className="charts charts--vertical">
                       <div className="charts__chart chart--p40 chart--red">
                         {/* <!-- <span className="charts__percent"></span> --> */}
@@ -66,7 +77,7 @@ class Choosing extends Component {
                   </div>
                 </div>
 
-                <div id="pet_desc_bnt">
+                <div className="pet_desc_bnt">
                   <div className="description">{pet.Description}</div>
                   <div className="btn_apply">
                     <button className="btn btn-6">Apply to entrust</button>
@@ -80,18 +91,24 @@ class Choosing extends Component {
               <div className="filter_head">Filtering</div>
               <div className="filter_list">
                 <ul>
-                  <li>{">"} Type of pets</li>
+                  <li>{">"} Housing form</li>
                   <div className="filter_contents">
                     <ul>
-                      <li>cat</li>
-                      <li>dog</li>
-                      <li>tiger</li>
-                      <li>iguana</li>
+                      {filtering.Housing.map((housing) => (
+                        <li key={housing.HousingID}> {housing.Name}</li>
+                      ))}
                     </ul>
                   </div>
 
-                  <li>{">"} Housing form</li>
-                  <li>{">"} Money</li>
+                  <li>{">"} Type of pets</li>
+                  <div className="filter_contents">
+                    <ul>
+                      {filtering.Species.map((species) => (
+                        <li key={species.SpeciesID}> {species.Name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* <li>{">"} Money </li> */}
                 </ul>
               </div>
             </div>
@@ -100,15 +117,12 @@ class Choosing extends Component {
               <div className="adv_filter_list">
                 <ul>
                   <li>
-                    {" "}
                     {">"} Type of cats
                     <div className="adv_filter_contents">
                       <ul>
-                        <li>Singapura</li>
-                        <li>Persian</li>
-                        <li>American Shorthair</li>
-                        <li>Scottish Fold</li>
-                        <li>Sphynx</li>
+                        {filtering.Breed.map((breed) => (
+                          <li key={breed.BreedID}> {breed.Name}</li>
+                        ))}
                       </ul>
                     </div>
                   </li>

@@ -92,43 +92,35 @@
           letter-spacing: 0em;
         }
       }
+      .ratio {
+        display: grid;
+        grid-template-rows: 17vw 1fr;
+      }
+    }
+    .pet_desc_bnt {
+      display: grid;
+      grid-template-rows: 5.5vw;
+      justify-items: center;
+      /* justify-content: center; */
+      padding: 10px;
+      .btn_apply {
+        justify-items: center;
+        padding: 10px;
+      }
+      .description {
+        font-family: Risque;
+        font-size: 0.9em;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.4em;
+        letter-spacing: 0em;
+        text-align: left;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
     }
   }
-  .petCard .pet_main_info #ratio {
-    display: grid;
-    grid-template-rows: 17vw 1fr;
-  }
-  .petCard .pet_main_info #ratio .ratio {
-    font-family: Roboto;
-    font-size: 1.2em;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.4em;
-    letter-spacing: 0em;
-    text-align: center;
-  }
-  .petCard #pet_desc_bnt {
-    display: grid;
-    grid-template-rows: 5.5vw;
-    justify-items: center;
-    /* justify-content: center; */
-    padding: 10px;
-  }
-  .petCard #pet_desc_bnt .btn_apply {
-    justify-items: center;
-    padding: 10px;
-  }
-  .petCard #pet_desc_bnt .description {
-    font-family: Risque;
-    font-size: 0.9em;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.4em;
-    letter-spacing: 0em;
-    text-align: left;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+
   .list {
     position: absolute;
     width: 17vw;
@@ -202,10 +194,41 @@
       }
     }
   }
-  /* .ul{
-    list-style:none;
-    } */
-  .ul {
-    list-style: none;
+  .btn {
+    background: none;
+    border: 2px solid;
+    border-bottom-width: 4px;
+    font: inherit;
+    letter-spacing: inherit;
+    // margin: 1em;
+    padding: 10px 1em;
+    text-transform: inherit;
+    transition: color 1s;
+  }
+
+  .btn-6 {
+    color: #f9879b;
+    &:hover {
+      animation: pulse 1s ease-in infinite;
+      background: radial-gradient(
+            circle,
+            rgba(249, 135, 155, 0.25) 43%,
+            transparent 50%
+          )
+          0 0/1em 1em,
+        radial-gradient(circle, rgba(249, 135, 155, 0.25) 43%, transparent 50%)
+          0.5em 0.5em/2em 2em;
+      color: #0bdcb7;
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      background-position: 0.66em 0.66em, -0.33em -0.33em;
+    }
+    100% {
+      background-size: 2em 2em, 1em 1em;
+      background-position: -1.5em -1.5em, -1em -1em;
+    }
   }
 }

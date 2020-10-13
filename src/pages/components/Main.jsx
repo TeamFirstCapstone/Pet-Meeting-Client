@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Main.scss";
-import { Link } from "react-router-dom";
 import { BASE_URL } from "../../config/url";
 import timeSince from "../../services/timeSince";
 import { download } from "../../services/image";
