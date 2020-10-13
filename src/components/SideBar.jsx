@@ -3,17 +3,19 @@ import PersonCard from "./PersonCard";
 import PetCard from "./PetCard";
 import "./SideBar.scss";
 import { BASE_URL } from "../config/url";
-import { download } from "../services/image";
 
 class SideBar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      user: {},
+      user: props.user,
       pets: [],
       chats: [],
     };
   }
+
+  statechange = (state) => this.setState(state);
+
   componentDidMount() {
     fetch(BASE_URL + "/user/profile", {
       method: "GET",
@@ -23,16 +25,12 @@ class SideBar extends Component {
       .then((json) => {
         if (json.status) {
           console.log(json);
-          const { user, pets, chats } = json.result;
-          //user's image
-          download(user.Filename).then((url) => {
-            user.ImgUrl = url;
-            this.setState({ user: user });
-          });
+          const { pets, chats } = json.result;
           this.setState({ pets: pets, chats: chats });
         }
       });
   }
+
   render() {
     const { user, pets, chats } = this.state;
     const { statechange } = this.props;
@@ -72,7 +70,11 @@ class SideBar extends Component {
           </div>
           <div className="chats_main">
             {chats.map((chat, idx) => (
-              <PersonCard {...chat} key={idx}></PersonCard>
+              <PersonCard
+                statechange={this.props.statechange}
+                {...chat}
+                key={idx}
+              ></PersonCard>
             ))}
           </div>
         </div>

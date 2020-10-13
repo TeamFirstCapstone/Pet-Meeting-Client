@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Signup.scss";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { useHistory } from "react-router-dom";
 import { logined, signup, signup_status } from "../services/user";
 
 class Signup extends Component {
