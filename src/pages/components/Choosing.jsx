@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./Choosing.scss";
+import "./_vertical.scss";
+import "./chart.scss";
+
 import { BASE_URL } from "../../config/url";
 import { download } from "../../services/image";
-
 class Choosing extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,7 @@ class Choosing extends Component {
     fetch(BASE_URL + "/entrust/pet")
       .then((res) => res.json())
       .then((json) => {
+        // Error 뜬다.
         const pets = json.result;
 
         Promise.all(
@@ -67,6 +70,13 @@ class Choosing extends Component {
     return true;
   };
 
+  entrust = (pet) => {
+    this.props.statechange({
+      entrustingPet: pet,
+      page: "raise",
+    });
+  };
+
   render() {
     const { pets, filteringInfo } = this.state;
     return (
@@ -98,7 +108,7 @@ class Choosing extends Component {
 
                     <div className="ratio">
                       <div className="charts charts--vertical">
-                        <div className="charts__chart chart--p40 chart--red">
+                        <div className="charts__chart chart--p20 chart--red">
                           {/* <!-- <span className="charts__percent"></span> --> */}
                         </div>
                         {/* <!-- /.charts__chart --> */}
@@ -110,7 +120,12 @@ class Choosing extends Component {
                   <div className="pet_desc_bnt">
                     <div className="description">{pet.Description}</div>
                     <div className="btn_apply">
-                      <button className="btn btn-6">Apply to entrust</button>
+                      <button
+                        className="btn btn-6"
+                        onClick={(e) => this.entrust(pet)}
+                      >
+                        Apply to entrust
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -153,7 +168,6 @@ class Choosing extends Component {
                       ))}
                     </ul>
                   </div>
-                  {/* <li>{">"} Money </li> */}
                 </ul>
               </div>
             </div>

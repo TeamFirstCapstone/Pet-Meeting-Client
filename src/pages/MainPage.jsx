@@ -19,6 +19,7 @@ class MainPage extends Component {
         UID: 0,
       },
       chatPartner: null,
+      entrustingPet: null,
     };
   }
 
@@ -37,15 +38,20 @@ class MainPage extends Component {
   }
 
   render() {
-    const { page, chatPartner, user } = this.state;
+    const { chatPartner, user, entrustingPet } = this.state;
     return (
       <div id="main">
         <SideBar user={user} statechange={this.statechange} />
-        {page === "main" ? <Main statechange={this.statechange} /> : null}
-        {page === "choosing" ? (
-          <Choosing statechange={this.statechange} />
-        ) : null}
-        {page === "entrust" ? <Entrust statechange={this.statechange} /> : null}
+
+        {((page) => {
+          if (page === "choosing")
+            return <Choosing statechange={this.statechange} />;
+          else if (page === "entrust")
+            return <Entrust statechange={this.statechange} />;
+          else if (page === "raise" && entrustingPet != null)
+            /* Later on */ return null;
+          else return <Main statechange={this.statechange} />;
+        })(this.state.page)}
 
         {chatPartner != null ? (
           <Chat

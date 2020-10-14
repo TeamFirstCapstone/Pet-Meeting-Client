@@ -26,6 +26,10 @@
           width: 67px;
           border-radius: 100%;
           padding: 0 8px;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+          }
         }
         .image {
           height: 50px;

@@ -3,6 +3,7 @@ import "./Entrust.scss";
 import imgPlus from "../../images/plus.png";
 import imgNoplus from "../../images/minus.png";
 import { BASE_URL } from "../../config/url";
+import { download } from "../../services/image";
 
 class Entrust extends Component {
   constructor(props) {
@@ -11,25 +12,37 @@ class Entrust extends Component {
     this.state = {
       // 전체 목록
       info: {
-        pets: [],
-        housings: [],
+        Pets: [],
+        Housings: [],
       },
       form: {
-        pets: [],
-        date: "",
-        housings: [],
-        elses: "",
+        Pets: [],
+        Date: "",
+        Housings: [],
+        Text: "",
       },
 
       isHousingAdded: false,
-      isPetAdded: false,
     };
   }
 
   componentDidMount() {
-    fetch(BASE_URL + "/info/list")
+    fetch(BASE_URL + "/entrust/info")
       .then((res) => res.json())
-      .then((json) => this.setState({ list: json.result }));
+      .then((json) => {
+        Promise.all(
+          json.result.Pets.map((pet) =>
+            download(pet.Filename).then((url) => {
+              pet.ImgUrl = url;
+              return pet;
+            })
+          )
+        ).then((pets) => {
+          json.result.Pets = pets;
+          console.log(json.result);
+          this.setState({ info: json.result });
+        });
+      });
   }
 
   handleChange = (e) => {
@@ -39,70 +52,44 @@ class Entrust extends Component {
   };
 
   toggleHousing = (e) => {
-    if (this.state.form.housings.length !== this.state.housings.length)
+    if (this.state.form.Housings.length !== this.state.info.Housings.length)
       this.setState({ isHousingAdded: true });
-  };
-  togglePet = (e) => {
-    if (this.state.form.pets.length !== this.state.pets.length)
-      this.setState({ isPetAdded: true });
   };
 
   addHousing = (housing) => {
     var form = this.state.form;
-    form.housings.push(housing);
+    form.Housings.push(housing);
+    console.log(form);
     this.setState({ form: form, isHousingAdded: false });
   };
+
   removeHousing = (housing) => {
     var form = this.state.form;
-    form.housings.splice(form.housings.indexOf(housing), 1);
+    form.Housings.splice(form.Housings.indexOf(housing), 1);
     this.setState({ form: form });
   };
 
   render() {
     const { info, form } = this.state;
-    const { isHousingAdded, isPetAdded } = this.state;
+    const { isHousingAdded } = this.state;
     return (
       <div id="entrust">
         <div className="title">Entrust application</div>
         <div className="formbox">
+          {/* pets가 overflow 되면? */}
           <div className="pets">
             <div className="name">Choose your pet to entrust</div>
             <div className="box">
-              {form.pets.map((pet) => (
-                <div className="item">
+              {info.Pets.map((pet) => (
+                <div className="item" key={pet.PID}>
                   <img
                     className="image"
                     style={{ backgroundImage: `url(${pet.ImgUrl})` }}
                     alt=""
                   />
                   <div className="petname">{pet.Name}</div>
-                  <img className="noplus" src={imgNoplus} alt="" />
                 </div>
               ))}
-              {isPetAdded
-                ? info.pets.map((pet, idx) =>
-                    form.pets.includes(pet) ? null : (
-                      <div className="item">
-                        <img
-                          className="image"
-                          style={{ backgroundImage: `url(${pet.ImgUrl})` }}
-                          alt=""
-                        />
-                        <div className="petname">{pet.Name}</div>
-                        <img className="blur" src={imgNoplus} alt="" />
-                      </div>
-                    )
-                  )
-                : null}
-              <div className="item plus">
-                <img
-                  className="image"
-                  src={imgPlus}
-                  alt=""
-                  onClick={this.togglePet}
-                />
-                <div className="petname"></div>
-              </div>
             </div>
           </div>
           <div className="fills">
@@ -120,29 +107,31 @@ class Entrust extends Component {
               </div>
               <div className="name">Housing Form</div>
               <div className="housingform">
-                {form.housings.map((housing, idx) => (
+                {form.Housings.map((housing) => (
                   <div
                     className="item"
-                    key={idx}
+                    key={housing.HousingID}
                     onClick={(e) => this.removeHousing(housing)}
                   >
-                    {housing}
+                    {housing.Name}
                   </div>
                 ))}
 
-                {isHousingAdded
-                  ? info.housings.map((housing, idx) =>
-                      form.housings.includes(housing) ? null : (
+                {(() => {
+                  if (isHousingAdded)
+                    return info.Housings.map((housing, idx) =>
+                      form.Housings.includes(housing) ? null : (
                         <div
                           className="item blue"
-                          key={idx}
+                          key={housing.HousingID}
                           onClick={(e) => this.addHousing(housing)}
                         >
-                          {housing}
+                          {housing.Name}
                         </div>
                       )
-                    )
-                  : null}
+                    );
+                })()}
+
                 <i
                   className={`fas fa-plus item ${isHousingAdded ? "blue" : ""}`}
                   onClick={this.toggleHousing}
@@ -156,7 +145,7 @@ class Entrust extends Component {
                 placeholder="Type something more to say"
                 onChange={this.handleChange}
                 name="elses"
-                value={form.elses}
+                value={form.Text}
               ></textarea>
             </div>
           </div>

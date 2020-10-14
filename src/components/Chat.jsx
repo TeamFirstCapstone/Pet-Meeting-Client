@@ -76,24 +76,21 @@ class Chat extends Component {
         </div>
 
         <div className="chat-messages">
-          {chats.map((chat, idx) => {
-            // Warning이 맞는 거다!
-            const isPartener = chat.writer == partner.UID;
-
-            return (
-              <div className="message-box-holder" key={idx}>
-                <div
-                  className={`message-box ${
-                    isPartener ? "message-partner" : null
-                  }`}
-                >
-                  {chat.message}
-                </div>
-              </div>
-            );
-          })}
+          {chats.map((chat, idx) => (
+            <div className="message-box-holder" key={idx}>
+              {
+                // Warning이 맞는 거다!
+                chat.writer == partner.UID ? (
+                  <div className="message-box">{chat.message}</div>
+                ) : (
+                  <div className="message-box " message-partner>
+                    {chat.message}
+                  </div>
+                )
+              }
+            </div>
+          ))}
         </div>
-
         <div className="chat-input-holder">
           <textarea
             className="chat-input"
