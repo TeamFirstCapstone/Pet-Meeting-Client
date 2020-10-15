@@ -28,7 +28,7 @@ class Signup extends Component {
       this.setState({ signup_error: "password is null" });
     else {
       // return result which is one of login_status string
-      signup(username, password, email, phone)
+      signup({username, password, email, phone})
         .then((result) => {
           if (result === signup_status.success) {
             alert("Signup successful");

@@ -6,7 +6,7 @@ const signup_status = {
   server_error: "server_error",
 };
 
-function signup(username, password, email, phone) {
+function signup({username, password, email, phone}) {
   return fetch(BASE_URL + "/signup", {
     method: "post",
     headers: { "Content-Type": "application/json; charset=UTF-8" },
