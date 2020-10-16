@@ -18,7 +18,7 @@
  give an opportunity for free pet consignment experience.
 
 
-#Built With
+# Built With
  * []() React.js
  * []() Node.js
  * []() Redis
@@ -26,7 +26,7 @@
 
 <!--GETTING STARTED-->
 
-##Getting Started
+## Getting Started
 
 
 ### Installation
@@ -47,7 +47,7 @@ npm install
 
 
 
-###Contributing
+### Contributing
  
 1. Fork the Project
 2. Create your Feature Branch
@@ -55,7 +55,7 @@ npm install
 4. Push to the Branch 
 5. Open a Pull Request 
 
-##Contatct 
+## Contatct 
 
 JaeHyunShin- skwent77@gmail.com
   
