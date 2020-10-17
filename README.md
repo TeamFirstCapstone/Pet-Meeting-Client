@@ -27,7 +27,13 @@
 <!--GETTING STARTED-->
 
 ## Getting Started
+1. Node.js and MySQL 5.7 must be installed first.
 
+2. Download or Clone the repository.
+
+3. Modify config.js to match your server environment.
+
+4. Install dependencies.
 
 ### Installation
 
