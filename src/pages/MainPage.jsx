@@ -6,20 +6,21 @@ import { download } from "../services/image";
 import Choosing from "./components/Choosing";
 import Entrust from "./components/Entrust";
 import Main from "./components/Main";
+import Raise from "./components/Raise";
 
 class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // main, choosing, entrust
-      page: "choosing",
+      page: "main",
       user: {
         Username: "",
         ImgUrl: null,
         UID: 0,
       },
       chatPartner: null,
-      entrustingPet: null,
+      eid: null,
     };
   }
 
@@ -38,18 +39,18 @@ class MainPage extends Component {
   }
 
   render() {
-    const { chatPartner, user, entrustingPet } = this.state;
+    const { chatPartner, user, eid } = this.state;
     return (
-      <div id="main">
+      <div id="main" style={{ display: "flex", height: "100%" }}>
         <SideBar user={user} statechange={this.statechange} />
 
         {((page) => {
           if (page === "choosing")
-            return <Choosing statechange={this.statechange} />;
+            return <Choosing UID={user.UID} statechange={this.statechange} />;
           else if (page === "entrust")
             return <Entrust statechange={this.statechange} />;
-          else if (page === "raise" && entrustingPet != null)
-            /* Later on */ return null;
+          else if (page === "raise" && eid != null)
+            return <Raise EID={eid} statechange={this.statechange} />;
           else return <Main statechange={this.statechange} />;
         })(this.state.page)}
 

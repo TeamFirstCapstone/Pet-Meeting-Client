@@ -64,6 +64,7 @@ class Choosing extends Component {
     // TODO. Housing Filtering은 던진다..!
     const { Breed, Species } = this.state.filtering;
 
+    if (pet.UID == this.props.UID) return false;
     if (Breed.length && !Breed.includes(pet.Breed)) return false;
     if (Species.length && !Species.includes(pet.Species)) return false;
 
@@ -72,7 +73,7 @@ class Choosing extends Component {
 
   entrust = (pet) => {
     this.props.statechange({
-      entrustingPet: pet,
+      eid: pet.EID,
       page: "raise",
     });
   };
@@ -106,15 +107,12 @@ class Choosing extends Component {
                       <div className="species">{pet.Breed}</div>
                     </div>
 
-                    <div className="ratio">
+                    {/* <div className="ratio">
                       <div className="charts charts--vertical">
-                        <div className="charts__chart chart--p20 chart--red">
-                          {/* <!-- <span className="charts__percent"></span> --> */}
-                        </div>
-                        {/* <!-- /.charts__chart --> */}
+                        <div className="charts__chart chart--p20 chart--red"></div>
                       </div>
                       <div className="ratio_text">ratio</div>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="pet_desc_bnt">
@@ -124,7 +122,7 @@ class Choosing extends Component {
                         className="btn btn-6"
                         onClick={(e) => this.entrust(pet)}
                       >
-                        Apply to entrust
+                        Apply to raise
                       </button>
                     </div>
                   </div>

@@ -11,8 +11,11 @@
   /* grid-template-columns: 200px 1fr; */
   justify-content: center;
   width: 81vw;
-  margin-left: 200px;
   padding-left: 20px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   #showing_block {
     display: block;
@@ -30,21 +33,23 @@
   }
   .petCard {
     display: grid;
-    grid-template-rows: 3fr 10vw;
+    grid-template-rows: 1.3fr 1fr;
 
     border: 1px solid;
     box-sizing: border-box;
     border-radius: 17px;
-    padding: 1.2em;
+    padding: 8px;
 
     .pet_main_info {
       display: flex;
+      justify-content: center;
       .box {
         width: 70%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-left: 8%;
+        align-self: center;
+        padding: 0 5%;
         font-family: Risque, "san-sarif";
         .profileImg {
           height: 100px; // TODO!!
@@ -125,7 +130,6 @@
   .list {
     position: absolute;
     width: 17vw;
-    height: 60vh;
     left: 80vw;
     top: 6vh;
 

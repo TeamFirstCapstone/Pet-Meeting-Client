@@ -14,12 +14,15 @@ class Entrust extends Component {
       info: {
         Pets: [],
         Housings: [],
+        Cities: [],
       },
       form: {
         Pets: [],
         Date: "",
         Housings: [],
+        CityID: 0,
         Text: "",
+        Toypayment: "",
       },
 
       isHousingAdded: false,
@@ -53,20 +56,52 @@ class Entrust extends Component {
 
   toggleHousing = (e) => {
     if (this.state.form.Housings.length !== this.state.info.Housings.length)
-      this.setState({ isHousingAdded: true });
+      this.setState({ isHousingAdded: !this.state.isHousingAdded });
   };
 
-  addHousing = (housing) => {
+  addForm = (name, item) => {
     var form = this.state.form;
-    form.Housings.push(housing);
-    console.log(form);
-    this.setState({ form: form, isHousingAdded: false });
-  };
-
-  removeHousing = (housing) => {
-    var form = this.state.form;
-    form.Housings.splice(form.Housings.indexOf(housing), 1);
+    form[name].push(item);
     this.setState({ form: form });
+  };
+
+  removeForm = (name, item) => {
+    var form = this.state.form;
+    form[name].splice(form[name].indexOf(item), 1);
+    this.setState({ form: form });
+  };
+
+  // 2018-03-20 ~ 2020-10-02
+
+  submit = () => {
+    const { form } = this.state;
+    var date = form.Date.split("~");
+    delete form.Date;
+    form.HousingIDs = form.Housings.map((housing) => housing.HousingID);
+    delete form.Housings;
+    form.PetIDs = form.Pets.map((pet) => pet.PID);
+    delete form.Pets;
+
+    form.StartDate = date[0];
+    form.EndDate = date[1];
+    form.Toypayment = Number(form.Toypayment);
+    form.CityID = Number(form.CityID);
+    form.Preypayment = false; // Fake
+    console.log(form);
+
+    fetch(BASE_URL + "/entrust", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        if (json.status) {
+          this.props.statechange({ page: "main" });
+          alert("Entrust completely");
+        } else alert("Error");
+      });
   };
 
   render() {
@@ -80,16 +115,29 @@ class Entrust extends Component {
           <div className="pets">
             <div className="name">Choose your pet to entrust</div>
             <div className="box">
-              {info.Pets.map((pet) => (
-                <div className="item" key={pet.PID}>
-                  <img
-                    className="image"
-                    style={{ backgroundImage: `url(${pet.ImgUrl})` }}
-                    alt=""
-                  />
-                  <div className="petname">{pet.Name}</div>
-                </div>
-              ))}
+              {(() => {
+                return info.Pets.map((pet) =>
+                  form.Pets.includes(pet) ? (
+                    <div
+                      className="item checked"
+                      key={pet.PID}
+                      onClick={(e) => this.removeForm("Pets", pet)}
+                    >
+                      <img className="image" src={pet.ImgUrl} alt="" />
+                      <div className="petname checked_name">{pet.Name}</div>
+                    </div>
+                  ) : (
+                    <div
+                      className="item"
+                      key={pet.PID}
+                      onClick={(e) => this.addForm("Pets", pet)}
+                    >
+                      <img className="image" src={pet.ImgUrl} alt="" />
+                      <div className="petname">{pet.Name}</div>
+                    </div>
+                  )
+                );
+              })()}
             </div>
           </div>
           <div className="fills">
@@ -99,9 +147,9 @@ class Entrust extends Component {
               <div className="dateInput">
                 <input
                   type="text"
-                  name="date"
+                  name="Date"
                   onChange={this.handleChange}
-                  value={form.date}
+                  value={form.Date}
                   placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
                 />
               </div>
@@ -111,7 +159,7 @@ class Entrust extends Component {
                   <div
                     className="item"
                     key={housing.HousingID}
-                    onClick={(e) => this.removeHousing(housing)}
+                    onClick={(e) => this.removeForm("Housings", housing)}
                   >
                     {housing.Name}
                   </div>
@@ -124,7 +172,10 @@ class Entrust extends Component {
                         <div
                           className="item blue"
                           key={housing.HousingID}
-                          onClick={(e) => this.addHousing(housing)}
+                          onClick={(e) => {
+                            this.addForm("Housings", housing);
+                            this.toggleHousing(e);
+                          }}
                         >
                           {housing.Name}
                         </div>
@@ -137,6 +188,32 @@ class Entrust extends Component {
                   onClick={this.toggleHousing}
                 />
               </div>
+              <div className="name">Location</div>
+              <div className="dataInput">
+                <select
+                  name="CityID"
+                  value={form.CityID}
+                  onChange={this.handleChange}
+                >
+                  <option value="0">city</option>
+                  {info.Cities.map((city, idx) => (
+                    <option key={idx} value={city.CityID}>
+                      {city.Name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="name">Toy Payment</div>
+              <div className="dateInput">
+                <input
+                  type="text"
+                  name="Toypayment"
+                  onChange={this.handleChange}
+                  value={form.Toypayment}
+                  placeholder="How much you want to pay for"
+                />
+                Won
+              </div>
               <div className="name">Else</div>
               <textarea
                 id="textarea"
@@ -144,12 +221,17 @@ class Entrust extends Component {
                 rows="10"
                 placeholder="Type something more to say"
                 onChange={this.handleChange}
-                name="elses"
+                name="Text"
                 value={form.Text}
               ></textarea>
             </div>
           </div>
-          <input className="submit" type="button" value="Submit" />
+          <input
+            className="submit"
+            type="button"
+            value="Submit"
+            onClick={this.submit}
+          />
         </div>
       </div>
     );

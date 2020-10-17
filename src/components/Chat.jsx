@@ -38,7 +38,10 @@ class Chat extends Component {
   getChat = () => {
     fetch(BASE_URL + "/chat/list/" + this.props.partner.UID)
       .then((res) => res.json())
-      .then((json) => this.setState({ chats: json.result }));
+      .then((json) => {
+        console.log(json.result);
+        this.setState({ chats: json.result });
+      });
   };
 
   addChat = (chat) => {
@@ -55,6 +58,7 @@ class Chat extends Component {
       writer: user.UID,
       message: message,
     });
+    this.setState({ message: "" });
   };
 
   render() {
@@ -81,11 +85,11 @@ class Chat extends Component {
               {
                 // Warning이 맞는 거다!
                 chat.writer == partner.UID ? (
-                  <div className="message-box">{chat.message}</div>
-                ) : (
-                  <div className="message-box " message-partner>
+                  <div className="message-box message-partner">
                     {chat.message}
                   </div>
+                ) : (
+                  <div className="message-box">{chat.message}</div>
                 )
               }
             </div>

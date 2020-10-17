@@ -4,7 +4,7 @@
   padding: 0;
 }
 #sidebar {
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   height: 100%;
@@ -12,7 +12,7 @@
   font-size: 0.8em;
   display: flex;
   flex-direction: column;
-  padding: 0px 10px 0 10px;
+  padding: 0px 10px;
 
   background-color: #d3d3d3;
 
