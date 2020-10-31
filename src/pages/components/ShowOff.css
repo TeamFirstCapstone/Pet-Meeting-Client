@@ -1,0 +1,83 @@
+
+.box-container{
+    display:flex;
+    flex-direction:column;
+}
+
+.WorryPageProfile{
+    border-radius: 50%;
+    width:10vw;
+    height:10vh;
+
+}
+.PersonProfile{
+    margin-left:10vw;
+    width:60vw;
+    height:20vh;
+    display:flex-inline;
+  
+}
+.name{
+   
+    width:20vw;
+    height:10vh;
+    margin-bottom: 7vh;
+    font-size: 20px;
+    font-family:"Roboto";
+    flex-wrap:wrap-reverse;
+}
+.ShowOffPageProfile{
+    margin-left:10vw;
+    
+    width:70vw;
+    height:70vh;
+}
+
+.viewsIcon-container{
+
+    display:inline-flex;
+    align-items:flex-end;
+
+}
+.views{
+
+    margin-left:10vw;
+    width: 63vw;
+    font-family:"Roboto";
+    text-align:left;
+    text-overflow: ellipsis;
+    margin-bottom:5vh;
+}
+/*버튼 관련된 css*/
+.actions{
+    display:flex;
+    justify-content:space-around;
+  
+    /*align-items: flex-end;*/
+
+}
+.actions button{
+    display:flex;
+ 
+    margin-bottom:3vh;
+    flex-direction:column;
+    border: 1.5px;
+    background-color:transparent;
+}
+ul{
+    list-style: none;
+    font-size:0.5em;
+}
+button,
+button:focus{
+    border:none;
+    cursor:pointer;
+    outline:none;
+    font-size:2.5em;
+}
+.SubText{
+    margin-left:10vw;
+    text-align:left;
+    font-size:2em;
+    text-overflow:ellipsis ;
+}
