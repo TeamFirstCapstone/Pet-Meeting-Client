@@ -12,8 +12,11 @@
 
 
 }
-.title{
+head .title{
     font-size:3em;
+    margin-left:40px;
+    width: 70vw;
+    margin-top:40px;
 }
 header{
     display:flex;
@@ -64,6 +67,7 @@ body .worryFirst{
     width: 70vw;
     font-family:"Roboto";
     text-align:left;
+    text-overflow: ellipsis;
     margin-bottom:10px;
 }
 
@@ -71,14 +75,16 @@ body .worryFirst{
 .worrySecond{
     margin-top:30px;
     margin-left:40px;
-    width: 50vw;
+    width: 70vw;
+    text-overflow: ellipsis;
     font-family:"Roboto";
 }
 /*차이는 모르겠지맘ㄴ body.worryThird로 해도 되고 그냥 worryThird로 해도 된다*/
 .worryThird{
     margin-top:30px;
     margin-left:40px;
-    width: 50vw;
+    width: 70vw;
+    text-overflow: ellipsis;
     font-family:"Roboto";
 }
 .align-items-center{
