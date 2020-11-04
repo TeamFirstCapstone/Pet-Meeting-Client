@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./Main.scss";
 import { BASE_URL } from "../../config/url";
-import timeSince from "../../services/timeSince";
-import { download } from "../../services/image";
+import timeSince from "../../service/timeSince";
+import { download } from "../../service/image";
 
 class Main extends Component {
   constructor(props) {

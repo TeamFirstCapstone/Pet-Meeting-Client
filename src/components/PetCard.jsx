@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import { download } from "../services/image";
+import { download } from "../service/image";
 import "./PetCard.scss";
 
 class PetCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      src: null,
       ...props,
     };
   }
   componentDidMount() {
-    download(this.props.Filename).then((url) => {
-      this.setState({ ImgUrl: url });
-    });
+    download(this.props.Filename).then((url) => this.setState({ ImgUrl: url }));
   }
 
   render() {

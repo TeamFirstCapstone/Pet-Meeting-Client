@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "./Login.scss";
-import { login, login_status } from "../services/user";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
 import { Link } from "react-router-dom";
-import { logined } from "../services/user";
+import { user } from "../service";
 
 class Login extends Component {
   constructor(props) {
@@ -16,9 +15,10 @@ class Login extends Component {
       password: "",
       login_error: "",
     };
-    logined().then((status) => (this.logined = status));
+    user.logined().then((status) => this.moveHistory("main"));
   }
 
+  moveHistory = (site) => this.props.hisotry.push(site);
   handlechange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
 
@@ -29,17 +29,19 @@ class Login extends Component {
     else if (password === "")
       this.setState({ login_error: "password is null" });
     else {
-      login(username, password)
-        .then((result) => {
-          if (result === login_status.success) this.history.push("/main");
-          else if (result === login_status.login_fail) {
+      user
+        .login({ username, password })
+        .then(() => this.history.push("main"))
+
+        .catch((message) => {
+          console.log("Error " + message);
+          // Login 틀림
+          if (message === "No User!") {
             this.setState({ login_error: "login failed" });
             alert("Login fail check more");
-          } else if (result === login_status.server_error) console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Server Error!");
+          } else {
+            alert("Server Error!");
+          }
         });
     }
   };

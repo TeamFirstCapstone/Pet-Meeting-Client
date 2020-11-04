@@ -3,8 +3,8 @@ import "./Choosing.scss";
 import "./_vertical.scss";
 import "./chart.scss";
 
-import { BASE_URL } from "../../config/url";
-import { download } from "../../services/image";
+import { entrust } from "../../service";
+
 class Choosing extends Component {
   constructor(props) {
     super(props);
@@ -24,27 +24,8 @@ class Choosing extends Component {
   }
 
   componentDidMount() {
-    // List of entrustable pet
-    fetch(BASE_URL + "/entrust/pet")
-      .then((res) => res.json())
-      .then((json) => {
-        // Error 뜬다.
-        const pets = json.result;
-
-        Promise.all(
-          pets.map((pet) =>
-            download(pet.Filename).then((ImgUrl) => {
-              pet.ImgUrl = ImgUrl;
-              return pet;
-            })
-          )
-        ).then((pets) => this.setState({ pets: pets }));
-      });
-
-    // List of filtering
-    fetch(BASE_URL + "/info/list")
-      .then((res) => res.json())
-      .then((json) => this.setState({ filteringInfo: json.result }));
+    entrust.pets(0, 20).then((pets) => this.setState({ pets }));
+    entrust.info().then((result) => this.setState({ filteringInfo: result }));
   }
 
   toggleFilter = (e) => {

@@ -3,8 +3,7 @@ import "./Entrust.scss";
 import imgPlus from "../../images/plus.png";
 import imgNoplus from "../../images/minus.png";
 import { BASE_URL } from "../../config/url";
-import { download } from "../../services/image";
-
+import { download } from "../../service/image";
 class Entrust extends Component {
   constructor(props) {
     super(props);

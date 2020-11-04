@@ -6,13 +6,12 @@ import imgPage2 from "../images/page2.png";
 import imgPage3 from "../images/page3.png";
 import imgSonSunghun from "../images/SonSunghun.jpg";
 import Logo from "../components/Logo";
-import user from "../services/user";
+import { user, image } from "../service";
 
 class HomePage extends Component {
   constructor(props) {
     super();
     this.logined = false;
-    user.logined().then((status) => (this.logined = status));
 
     this.pageOffset = {
       first: "10vh",
@@ -26,6 +25,8 @@ class HomePage extends Component {
       top: this.pageOffset.first,
     };
   }
+
+  moveHistory = (site) => this.props.hisotry.push(site);
 
   componentDidMount = () => {
     window.addEventListener("wheel", (e) => {
@@ -68,7 +69,7 @@ class HomePage extends Component {
             </li>
           </ul>
           <div className="signin">
-            <Link to={this.logined ? "/main" : "/login"}>Signin</Link>
+            <div onClick={() => this.moveHistory("login")}> Signin</div>
           </div>
         </nav>
         <main style={{ top: top }}>

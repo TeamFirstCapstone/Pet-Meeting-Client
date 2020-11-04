@@ -2,36 +2,31 @@ import React, { Component } from "react";
 import PersonCard from "./PersonCard";
 import PetCard from "./PetCard";
 import "./SideBar.scss";
-import { BASE_URL } from "../config/url";
+import { download } from "../service/image";
 
 class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pets: [],
-      chats: [],
+      imgUrl: null,
     };
   }
 
   statechange = (state) => this.setState(state);
 
-  componentDidMount() {
-    fetch(BASE_URL + "/user/profile", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status) {
-          const { pets, chats } = json.result;
-          this.setState({ pets: pets, chats: chats });
-        }
-      });
+  componentDidUpdate(prevProps, _prevState) {
+    var { profile } = this.props;
+    if (prevProps.profile.user.Filename !== profile.user.Filename) {
+      download(profile.user.Filename).then((url) =>
+        this.setState({ imgUrl: url })
+      );
+    }
   }
 
   render() {
-    const { pets, chats } = this.state;
-    const { user, statechange } = this.props;
+    const { profile, statechange } = this.props;
+    const { pets, chats, user } = profile;
+    const { imgUrl } = this.state;
     return (
       <nav id="sidebar">
         <div className="topbar">
@@ -41,7 +36,7 @@ class SideBar extends Component {
           </div>
         </div>
         <div className="profile">
-          <img className="profileImg" src={user.ImgUrl} alt="" />
+          <img className="profileImg" src={imgUrl} alt="" />
           <div className="box">
             <div className="name">{user.Username}</div>
             <div className="setting">

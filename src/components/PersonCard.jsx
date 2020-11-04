@@ -4,10 +4,9 @@ import "./PersonCard.scss";
 
 class PersonCard extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      src: null,
-      ...props,
+      imgUrl: null,
     };
   }
 
@@ -24,7 +23,8 @@ class PersonCard extends Component {
   }
 
   render() {
-    const { Username, Text, ImgUrl } = this.state;
+    const { Username, Text } = this.props;
+    const { ImgUrl } = this.state;
     return (
       <div id="petCard" onClick={() => this.click()}>
         <img className="profileImg" alt="home" src={ImgUrl}></img>
