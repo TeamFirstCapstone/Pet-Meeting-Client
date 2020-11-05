@@ -1,60 +1,47 @@
 import React, { Component } from "react";
 import "./Main.scss";
-import { BASE_URL } from "../../config/url";
 import timeSince from "../../service/timeSince";
-import { download } from "../../service/image";
+import { worry, showoff } from "../../service";
 
 class Main extends Component {
   constructor(props) {
     super();
     this.state = {
       worries: [],
-      showoff: {},
+      showoff: {
+        Text: "",
+        ImgUrl: null,
+        Date: "2020-01-01",
+      },
     };
   }
 
   componentDidMount() {
-    fetch(BASE_URL + "/worry/list?limit=4", { method: "GET" })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status) this.setState({ worries: json.result });
-        else console.log(json.result);
-      });
-    fetch(BASE_URL + "/showoff/best", { method: "GET" })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status)
-          download(json.result.Filename).then((url) => {
-            json.result.ImgUrl = url;
-            this.setState({ showoff: json.result });
-          });
-        else console.log(json.result);
-      });
+    worry.list(0, 4).then((worries) => this.setState({ worries }));
+    showoff.best().then((showoff) => this.setState({ showoff }));
   }
 
   render() {
     const { worries, showoff } = this.state;
-    const { statechange } = this.props;
+    const { history } = this.props;
+
     return (
       <main id="mainpage">
         <div className="entrustBox">
-          <div
-            className="button"
-            onClick={() => statechange({ page: "entrust" })}
-          >
+          <div className="button" onClick={() => history.push("/main/entrust")}>
             Entrust your pet trustly!!
           </div>
-          <div
-            className="button"
-            onClick={() => statechange({ page: "choosing" })}
-          >
+          <div className="button" onClick={() => history.push("/main/raise")}>
             Want to keep a pet?
           </div>
         </div>
         <div className="worries">
           <div className="menu">
             <div className="title">Worries</div>
-            <i className="fas fa-plus"></i>
+            <i
+              className="fas fa-plus"
+              onClick={() => history.push("/main/worry")}
+            ></i>
           </div>
           <div className="main">
             {worries.map((worry, idx) => (
@@ -68,16 +55,14 @@ class Main extends Component {
         <div className="showoff">
           <div className="menu">
             <div className="title">Show off your pets</div>
-            <i className="fas fa-plus"></i>
+            <i
+              className="fas fa-plus"
+              onClick={() => history.push("/main/showoff")}
+            ></i>
           </div>
           <div className="main">
             <div className="thumbnail">
-              <div
-                className="img"
-                style={{
-                  backgroundImage: `url(${showoff.ImgUrl})`,
-                }}
-              ></div>
+              <img className="img" src={showoff.ImgUrl} alt="" />
             </div>
             <div className="textbox">
               <div className="text">{showoff.Text}</div>

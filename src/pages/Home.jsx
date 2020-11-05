@@ -6,7 +6,6 @@ import imgPage2 from "../images/page2.png";
 import imgPage3 from "../images/page3.png";
 import imgSonSunghun from "../images/SonSunghun.jpg";
 import Logo from "../components/Logo";
-import { user, image } from "../service";
 
 class HomePage extends Component {
   constructor(props) {
@@ -69,7 +68,7 @@ class HomePage extends Component {
             </li>
           </ul>
           <div className="signin">
-            <div onClick={() => this.moveHistory("login")}> Signin</div>
+            <Link to="/login">Signin</Link>
           </div>
         </nav>
         <main style={{ top: top }}>

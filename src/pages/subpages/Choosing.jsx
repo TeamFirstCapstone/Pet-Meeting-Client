@@ -4,6 +4,8 @@ import "./_vertical.scss";
 import "./chart.scss";
 
 import { entrust } from "../../service";
+import { render } from "@testing-library/react";
+import { Link } from "react-router-dom";
 
 class Choosing extends Component {
   constructor(props) {
@@ -11,103 +13,62 @@ class Choosing extends Component {
     this.state = {
       pets: [],
       filteringInfo: {
-        Housing: [],
-        Species: [],
-        Breed: [],
+        housing: [],
+        species: [],
+        breed: [],
       },
-      filtering: {
-        Housing: [],
-        Species: [],
-        Breed: [],
+      filteringForm: {
+        housing: [],
+        species: [],
+        breed: [],
       },
     };
   }
 
   componentDidMount() {
-    entrust.pets(0, 20).then((pets) => this.setState({ pets }));
-    entrust.info().then((result) => this.setState({ filteringInfo: result }));
+    entrust.pets(0, 100).then((pets) => this.setState({ pets }));
+    entrust.info().then((filteringInfo) => this.setState({ filteringInfo }));
   }
 
   toggleFilter = (e) => {
     const key = e.target.getAttribute("data-key");
     const name = e.target.getAttribute("name");
 
-    var filtering = this.state.filtering;
-    var attr = filtering[name];
+    var { filteringForm } = this.state;
+    var attr = filteringForm[name];
     if (attr.includes(key)) attr.splice(attr.indexOf(key), 1);
     else attr.push(key);
+    filteringForm[name] = attr;
 
-    this.setState({ filtering: filtering });
+    this.setState({ filteringForm });
     e.target.classList.toggle("clicked");
   };
 
   isMatchedWithFilter = (pet) => {
-    // TODO. Housing Filtering은 던진다..!
-    const { Breed, Species } = this.state.filtering;
+    const { breed, species, housing } = this.state.filteringForm;
 
-    if (pet.UID == this.props.UID) return false;
-    if (Breed.length && !Breed.includes(pet.Breed)) return false;
-    if (Species.length && !Species.includes(pet.Species)) return false;
-
-    return true;
-  };
-
-  entrust = (pet) => {
-    this.props.statechange({
-      eid: pet.EID,
-      page: "raise",
-    });
+    if (pet.UID === this.props.UID) return false;
+    if (breed.length && !breed.includes(pet.Breed)) return false;
+    if (species.length && !species.includes(pet.Species)) return false;
+    if (housing.length) {
+      for (const h of housing) if (pet.Housing.includes(Number(h))) return true;
+      return false;
+    } else return true;
   };
 
   render() {
     const { pets, filteringInfo } = this.state;
     return (
       <div id="choosing_page">
-        {/* <!-- <div className="head">
-              <h1>Choose and keep pets!</h1>
-            </div> --> */}
-
         <div id="showing_block">
           <div className="head">
             <h1>Choose and keep pets!</h1>
           </div>
 
           <div id="pet_cards_list">
-            {pets.map((pet, idx) =>
+            {pets.map((pet, index) =>
               this.isMatchedWithFilter(pet) ? (
-                <div className="petCard" key={idx}>
-                  <div className="pet_main_info">
-                    <div className="box">
-                      <img className="profileImg" src={pet.ImgUrl} alt="" />
-
-                      <div className="name">{pet.Name}</div>
-                      <div className="yeargender">
-                        <div className="year">{pet.Year} years old</div>
-                        <div className="gender"></div>
-                      </div>
-                      <div className="species">{pet.Breed}</div>
-                    </div>
-
-                    {/* <div className="ratio">
-                      <div className="charts charts--vertical">
-                        <div className="charts__chart chart--p20 chart--red"></div>
-                      </div>
-                      <div className="ratio_text">ratio</div>
-                    </div> */}
-                  </div>
-
-                  <div className="pet_desc_bnt">
-                    <div className="description">{pet.Description}</div>
-                    <div className="btn_apply">
-                      <button
-                        className="btn btn-6"
-                        onClick={(e) => this.entrust(pet)}
-                      >
-                        Apply to raise
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <Pet {...pet} index={index} key={index} />
               ) : null
             )}
           </div>
@@ -119,12 +80,12 @@ class Choosing extends Component {
                   <li>{">"} Housing form</li>
                   <div className="filter_contents">
                     <ul>
-                      {filteringInfo.Housing.map((housing) => (
+                      {filteringInfo.housing.map((housing) => (
                         <li
                           onClick={this.toggleFilter}
-                          name="Housing"
+                          name="housing"
                           key={housing.HousingID}
-                          data-key={housing.Name}
+                          data-key={housing.HousingID}
                         >
                           {housing.Name}
                         </li>
@@ -135,10 +96,10 @@ class Choosing extends Component {
                   <li>{">"} Type of pets</li>
                   <div className="filter_contents">
                     <ul>
-                      {filteringInfo.Species.map((species) => (
+                      {filteringInfo.species.map((species) => (
                         <li
                           onClick={this.toggleFilter}
-                          name="Species"
+                          name="species"
                           key={species.SpeciesID}
                           data-key={species.Name}
                         >
@@ -158,10 +119,10 @@ class Choosing extends Component {
                     {">"} Type of cats
                     <div className="adv_filter_contents">
                       <ul>
-                        {filteringInfo.Breed.map((breed) => (
+                        {filteringInfo.breed.map((breed) => (
                           <li
                             onClick={this.toggleFilter}
-                            name="Breed"
+                            name="breed"
                             key={breed.BreedID}
                             data-key={breed.Name}
                           >
@@ -174,6 +135,37 @@ class Choosing extends Component {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class Pet extends Component {
+  render() {
+    const { EID, ImgUrl, Name, Year, Breed, Description } = this.props;
+    return (
+      <div className="petCard">
+        <div className="pet_main_info">
+          <div className="box">
+            <img className="profileImg" src={ImgUrl} alt="" />
+
+            <div className="name">{Name}</div>
+            <div className="yeargender">
+              <div className="year">{Year} years old</div>
+              <div className="gender"></div>
+            </div>
+            <div className="species">{Breed}</div>
+          </div>
+        </div>
+
+        <div className="pet_desc_bnt">
+          <div className="description">{Description}</div>
+          <div className="btn_apply">
+            <Link to={`/main/raise/${EID}`} className="btn btn-6">
+              Apply to raise
+            </Link>
           </div>
         </div>
       </div>

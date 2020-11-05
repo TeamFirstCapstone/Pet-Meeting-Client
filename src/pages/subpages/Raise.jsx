@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BASE_URL } from "../../config/url";
+import { entrust, raise } from "../../service";
 import "./Raise.scss";
 
 class Raise extends Component {
@@ -7,72 +8,64 @@ class Raise extends Component {
     super(props);
     this.state = {
       info: {
-        Housings: [],
-        Cities: [],
+        species: [],
+        breed: [],
+        city: [],
+        housing: [],
+        gender: [],
       },
       form: {
         sex: "",
         age: "",
-        Housing: [],
-        CarrierPeriod: "",
-        Motivation: "",
-        City: "",
+        housing: [],
+        carrierPeriod: "",
+        motivation: "",
+        city: "",
       },
     };
   }
 
   componentDidMount() {
-    fetch(BASE_URL + "/entrust/info")
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.result);
-        this.setState({ info: json.result });
-      });
+    entrust
+      .info()
+      .then(({ species, breed, city, housing, gender }) =>
+        this.setState({ info: { species, breed, city, housing, gender } })
+      );
   }
 
   handleChange = (e) => {
-    // console.log(e.target.name);
-    // console.log(e.target.value);
     var form = this.state.form;
     form[e.target.name] = e.target.value;
     this.setState({ form: form });
   };
 
   submit = () => {
-    var { form, info } = this.state;
+    const { eid } = this.props.match.params;
+    const { form, info } = this.state;
+    const { housing, carrierPeriod, motivation, city } = form;
 
-    form.sex = form.sex === "Man" ? 1 : 2; // sex
-    form.age = Number(form.age);
-    form.CarrierPeriod = Number(form.CarrierPeriod);
+    if (!housing || !carrierPeriod || !motivation || !city) {
+      alert("Fill all the blanks!!");
+      return;
+    }
 
-    // Housing
-    info.Housings.forEach((housing) => {
-      if (form.Housing === housing.Name) form.HousingID = housing.HousingID;
-    });
-    delete form.Housing;
+    const cityId = info.city.find((v) => v.Name === city).CityID;
+    const housingId = info.housing.find((v) => v.Name === housing).HousingID;
 
-    // City
-    info.Cities.forEach((city) => {
-      if (form.City === city.Name) form.CityID = city.CityID;
-    });
-    delete form.City;
-
-    form.EID = this.props.EID;
-
-    console.log(form);
-    fetch(BASE_URL + "/entrust/raise", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.status) this.props.statechange({ page: "main", eid: null });
+    raise
+      .create({ motivation, carrierPeriod, housingId, eid, cityId })
+      .then(() => {
+        alert("apply successfully!");
+        this.props.history.push("/main");
+      })
+      .catch((message) => {
+        alert("Something Error");
+        console.log(message);
       });
   };
 
   render() {
-    const { info, form } = this.state;
+    const { info } = this.state;
     return (
       <div id="raise">
         <h1 className="centerTitle">Raising application</h1>
@@ -118,13 +111,13 @@ class Raise extends Component {
 
           <input
             type="text"
-            name="Housing"
+            name="housing"
             list="housingFormList"
             onChange={this.handleChange}
           />
           <datalist id="housingFormList">
-            {info.Housings.map((housing, idx) => (
-              <option value={housing.Name} key={idx}></option>
+            {info.housing.map((housing, idx) => (
+              <option value={housing.Name} key={idx} />
             ))}
           </datalist>
         </div>
@@ -139,7 +132,7 @@ class Raise extends Component {
             className="SeatingCount"
             min="0"
             max="30"
-            name="CarrierPeriod"
+            name="carrierPeriod"
             onChange={this.handleChange}
           />
           <div className="times">times</div>
@@ -151,12 +144,12 @@ class Raise extends Component {
           <div className="HousingFormComboBox">
             <input
               type="text"
-              name="City"
+              name="city"
               list="locationList"
               onChange={this.handleChange}
             />
             <datalist id="locationList">
-              {info.Cities.map((city, idx) => (
+              {info.city.map((city, idx) => (
                 <option value={city.Name} key={idx}></option>
               ))}
             </datalist>
@@ -169,7 +162,7 @@ class Raise extends Component {
 
           <textarea
             className="Text3"
-            name="Motivation"
+            name="motivation"
             onChange={this.handleChange}
           ></textarea>
         </div>

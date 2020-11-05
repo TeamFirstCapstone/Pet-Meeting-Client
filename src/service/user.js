@@ -1,4 +1,5 @@
-const { method, fetchWithMethod, addImage, addImages } = require("./base");
+const { method, fetchWithMethod } = require("./base");
+const { addImage, addImages } = require("./image");
 
 function login({ username, password }) {
   const body = { username, password };

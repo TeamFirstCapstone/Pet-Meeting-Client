@@ -2,7 +2,9 @@
 
 #raise {
   flex: 1;
-  margin: 0 15%;
+  width: 100%;
+  padding: 0 15%;
+  overflow-y: auto;
   .profile {
     margin-top: auto 100px;
     margin-left: auto 100px;
@@ -20,7 +22,6 @@
     padding: 12px 20px 15px 20px;
 
     /* margin: 0 atuo; */
-    position: absolute;
     left: 50%;
 
     margin-left: auto 10px;
@@ -29,13 +30,6 @@
   .ageText {
     font-family: Risque, "san-sarif";
     margin: 0.4rem 0;
-  }
-  .tt {
-    margin-top: 50px;
-    margin-left: 80px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    font-size: 1.4rem;
   }
   .housingFormText {
     margin: 1rem 0;
@@ -59,7 +53,7 @@
   }
 
   .tt {
-    margin-top: 70px;
+    margin-top: 20px;
     margin-left: 80px;
     margin-right: 50px;
     margin-bottom: 50px;

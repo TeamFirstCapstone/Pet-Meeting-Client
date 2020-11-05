@@ -1,4 +1,4 @@
-const { addImages } = require("./base");
+const { addImages } = require("./image");
 const base = require("./base");
 const { method, fetchWithMethod } = base;
 const suburl = "entrust";
@@ -35,10 +35,10 @@ const remove = (eid) => base.remove(suburl, eid);
 
 // 각 option별 정보가 담겨 있다.
 const info = () =>
-  fetchWithMethod(`/${suburl}/info`, method.GET).then((json) => json.result);
+  fetchWithMethod(`${suburl}/info`, method.GET).then((json) => json.result);
 
 const pets = (offset, limit) =>
-  base.list(`/${suburl}/pets`, offset, limit).then((pets) => addImages(pets));
+  base.list(`${suburl}/pets`, offset, limit).then((pets) => addImages(pets));
 
 module.exports = {
   list,

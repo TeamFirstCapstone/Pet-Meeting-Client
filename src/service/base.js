@@ -1,5 +1,4 @@
 const { BASE_URL } = require("../config/url");
-const { downloadWithImgId, downloadAllwithImgIds } = require("./image");
 
 const method = {
   GET: "GET",
@@ -7,6 +6,17 @@ const method = {
   PUT: "PUT",
   DELETE: "DELETE",
 };
+
+function fetchBase(url, option) {
+  return fetch(url, option).then(async (res) => {
+    if (res.ok) return res.json();
+    else {
+      if (res.status === 400)
+        throw await res.json().then((error) => error.message);
+      else; // TODO
+    }
+  });
+}
 
 function fetchWithMethod(url, type, body) {
   var option;
@@ -32,7 +42,8 @@ function fetchWithMethod(url, type, body) {
     };
   else throw new Error("Method type Error");
 
-  return fetch(BASE_URL + url, option).then((res) => res.json());
+  if (url[0] !== "/") url = "/" + url;
+  return fetchBase(BASE_URL + url, option);
 }
 
 // header를 form-data로 안했다
@@ -47,50 +58,32 @@ function fetchWithImage(url, type, body, file) {
   else if (type === method.PUT) option.method = "PUT";
   else throw new Error("Method type Error");
 
-  return fetch(BASE_URL + url, option).then((res) => res.json());
+  return fetchBase(BASE_URL + url, option);
 }
 
 // ---------------------------------
 
 const list = (url, offset, limit) => {
-  const fullUrl = `/${url}?limit=${limit}&offset=${offset}`;
+  const fullUrl = `${url}?limit=${limit}&offset=${offset}`;
   return fetchWithMethod(fullUrl, method.GET).then((json) => json.result);
 };
 
 const get = (suburl, id) =>
-  fetchWithMethod(`/${suburl}/${id}`, method.GET).then((json) => json.result);
+  fetchWithMethod(`${suburl}/${id}`, method.GET).then((json) => json.result);
 
 const create = (suburl, body) =>
-  fetchWithMethod(`/${suburl}`, method.POST, body).then((json) => json.result);
+  fetchWithMethod(`${suburl}`, method.POST, body).then((json) => json.result);
 
 const update = (suburl, id, body) =>
-  fetchWithMethod(`/${suburl}/${id}`, method.PUT, body).then(
+  fetchWithMethod(`${suburl}/${id}`, method.PUT, body).then(
     (json) => json.result
   );
 
 // `Delete` is a keyword of Javascript
 const remove = (suburl, id) =>
-  fetchWithMethod(`/${suburl}/${id}`, method.DELETE).then(
-    (json) => json.result
-  );
+  fetchWithMethod(`${suburl}/${id}`, method.DELETE).then((json) => json.result);
 
 // ---------------------------------
-
-const addImage = (item) => {
-  downloadWithImgId(item.ImgID).then((imgUrl) => {
-    item.imgUrl = imgUrl;
-    return item;
-  });
-};
-
-const addImages = (items) => {
-  const imgIds = items.map((item) => item.ImgID);
-
-  return downloadAllwithImgIds(imgIds).then((imgUrls) => {
-    imgUrls.forEach((imgUrl, idx) => (items[idx].imgUrl = imgUrl));
-    return items;
-  });
-};
 
 module.exports = {
   method,
@@ -101,6 +94,4 @@ module.exports = {
   create,
   update,
   remove,
-  addImage,
-  addImages,
 };

@@ -1,4 +1,4 @@
-const { addImages, addImage } = require("./base");
+const { addImages, addImage } = require("./image");
 const base = require("./base");
 const { method, fetchWithMethod, fetchWithImage } = base;
 const suburl = "showoff";
