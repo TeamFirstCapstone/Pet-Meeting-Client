@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Risque&display=swap");
+.table-register{
+    border-collapse:collapse;
+    margin-top:10vh;
+    width:80vw;
+    height:10vh;
+    font-size: 1.5em;
+    font-family: Risque, "san-sarif";
+}
+
+
+.tr{
+ display:table-row;
+ vertical-align: middle;
+ border-color:  #2c3e50;
+ margin-left:5vw;
+ width:90vw;
+ height:3vh;
+ 
+ font-family: Risque, "san-sarif";
+
+ width:60vw;
+}
+.form-control-1{
+    display:block;
+    border-radius:8px 8px 8px 8px;
+    padding:0 12px 12px 12px;
+    
+    font-family: Risque, "san-sarif";
+    
+}
+.form-control-2{
+    display:block;
+    border-radius:16px 16px 16px 16px;
+    padding:0 12px 12px 12px;
+    
+    font-family: Risque, "san-sarif";
+    
+}
+.btn-register{
+    width:10vw;
+    height:10vh;
+    margin-bottom:30px;
+    margin-top:5vh;
+    margin-left:70vw;
+    height:5vh;
+    font-size:2em;
+    
+    font-family: Risque, "san-sarif";
+}
