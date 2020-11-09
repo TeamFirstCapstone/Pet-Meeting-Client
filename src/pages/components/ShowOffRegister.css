@@ -1,9 +1,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Risque&display=swap");
 .profile-icon{
-    height: 4em;
-    width: 4em;
-    border-radius: 100%;
+    height: 10em;
+    width: 30em;
     border: 1px solid red;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,12 +10,15 @@
     font-family: Risque, "san-sarif";
     margin: auto;
 }
-.ImageRegister{
-    padding:20px;
+
+
+
+.guideline-showoffregister{
+    margin-top:1vh;
+    margin-left:50vw;
+    font-size:1.5em;
+    font-family: Risque, "san-sarif";
 }
-
-
-
 
 
 .article-title{
@@ -33,7 +35,7 @@
     font-weight: bold;
     width:80vw;
     margin-left:5vw;
-    margin-top:4vh;
+    margin-top:3vh;
     font-size:2em;
     font-family: Risque, "san-sarif";
 }
@@ -50,7 +52,7 @@
     margin-top:3vh;
     margin-left:5vw;
     width:80vw;
-    height:50vh;
+    height:40vh;
     border-radius:16px 16px 16px 16px;
     font-family: Risque, "san-sarif";
 }
@@ -58,7 +60,7 @@
     width:10vw;
     height:10vh;
     margin-bottom:30px;
-    margin-top:5vh;
+    margin-top:3vh;
     margin-left:70vw;
     font-size:2em;
     
