@@ -49,10 +49,10 @@ function fetchWithMethod(url, type, body) {
 // header를 form-data로 안했다
 function fetchWithImage(url, type, body, file) {
   var formData = new FormData();
-  Object.keys(body).forEach((item) => formData.append(item, formData[item]));
-  formData.append("img", file);
+  for (const name in body) formData.append(name, body[name]);
+  formData.append("img", file, file.name);
 
-  var option = { body: JSON.stringify(formData) };
+  var option = { body: formData };
 
   if (type === method.POST) option.method = "POST";
   else if (type === method.PUT) option.method = "PUT";

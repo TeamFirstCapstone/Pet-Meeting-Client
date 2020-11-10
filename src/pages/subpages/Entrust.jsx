@@ -94,14 +94,18 @@ class Entrust extends Component {
           <div className="pets">
             <div className="name">Choose your pet to entrust</div>
             <div className="box">
-              {info.pets.map((pet, idx) =>
-                // TODO: Key 나중에 넣자
-                form.petIds.includes(pet.PID) ? (
-                  <Pet {...pet} choosen={true} removeForm={this.removeForm} />
-                ) : (
-                  <Pet {...pet} choosen={false} addForm={this.addForm} />
-                )
-              )}
+              {info.pets.map((pet, idx) => {
+                const choosen = form.petIds.includes(pet.PID);
+                return (
+                  <Pet
+                    {...pet}
+                    key={idx}
+                    choosen={choosen}
+                    removeForm={this.removeForm}
+                    addForm={this.addForm}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className="fills">

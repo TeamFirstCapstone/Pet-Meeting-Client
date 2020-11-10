@@ -8,6 +8,8 @@ import Raise from "./subpages/Raise";
 // import Showoff from "./subpages/Showoff";
 import { user } from "../service";
 import { Route } from "react-router-dom";
+import ShowoffRegister from "./subpages/ShowoffRegister";
+import WorryRegister from "./subpages/WorryRegister";
 
 class MainPage extends Component {
   constructor(props) {
@@ -22,37 +24,29 @@ class MainPage extends Component {
         pets: [],
         chats: [],
       },
-      chatPartner: null,
+      currentChat: null, //index of chats
     };
   }
 
+  chatting = (index) => {
+    if (index == null) this.setState({ currentChat: null });
+    else this.setState({ currentChat: this.state.profile.chats[index] });
+  };
+
   componentDidMount() {
     user.profile().then((profile) => this.setState({ profile }));
+    // socket 다 연결하기 chats[i].socket
   }
 
   statechange = (state) => this.setState(state);
 
   render() {
-    const { profile } = this.state;
+    const { profile, currentChat } = this.state;
     const { match } = this.props;
 
     return (
       <div id="main" style={{ display: "flex", height: "100%" }}>
-        <SideBar {...profile} statechange={this.statechange} />
-
-        {((page) => {
-          // if (page === "choosing")
-          // return (
-          //   <Choosing UID={profile.user.UID} statechange={this.statechange} />
-          // );
-          // else if (page === "entrust")
-          //   return <Entrust statechange={this.statechange} />;
-          // else if (page === "raise" && eid != null)
-          //   return <Raise EID={eid} statechange={this.statechange} />;
-          // else if (page === "showoff")
-          //   return <Showoff statechange={this.statechange} />;
-          // return <Main statechange={this.statechange} />;
-        })(this.state.page)}
+        <SideBar {...profile} chatting={this.chatting} />
 
         <Route exact path={match.url} component={Main} />
         <Route exact path={`${match.path}/entrust`} component={Entrust} />
@@ -62,14 +56,24 @@ class MainPage extends Component {
           path={`${match.path}/raise/:eid([0-9]+)`}
           component={Raise}
         />
+        <Route
+          exact
+          path={`${match.path}/showoff/register`}
+          component={ShowoffRegister}
+        />
+        <Route
+          exact
+          path={`${match.path}/worry/register`}
+          component={WorryRegister}
+        />
 
-        {/* {chatPartner != null ? (
+        {currentChat != null ? (
           <Chat
             user={profile.user}
-            partner={chatPartner}
-            statechange={this.statechange}
+            partner={currentChat}
+            chatting={this.chatting}
           />
-        ) : null} */}
+        ) : null}
       </div>
     );
   }

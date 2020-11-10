@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import socketio from "socket.io-client";
 import { BASE_URL } from "../config/url";
 import "./Chat.scss";
 
@@ -7,30 +6,8 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chats: [],
       message: "Type a message",
     };
-
-    this.socket = socketio.connect(BASE_URL);
-    this.socket.emit("send_id", { uid: this.props.user.UID });
-    this.socket.on("chat", (chat) => {
-      chat = JSON.parse(chat);
-      this.addChat(chat);
-    });
-  }
-
-  statechange = (state) => this.setState(state);
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
-  componentDidMount = () => this.getChat();
-
-  // 처음 채팅 눌렀을 때는 대화가 안뜬다 이상하다.
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.partner !== nextProps.partner) {
-      this.getChat();
-      return true;
-    } else if (this.state !== nextState) return true;
-    else return false;
   }
 
   closeChat = () => this.props.statechange({ chatPartner: null });

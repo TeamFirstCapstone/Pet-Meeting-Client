@@ -11,7 +11,7 @@ class SideBar extends Component {
       Username: "",
       UID: 0,
     },
-    statechange: () => {},
+    chatting: () => {},
   };
 
   render() {
@@ -53,7 +53,7 @@ class SideBar extends Component {
           <div className="chats_main">
             {chats.map((chat, idx) => (
               <PersonCard
-                statechange={this.props.statechange}
+                chatting={this.props.chatting}
                 {...chat}
                 index={idx}
                 key={idx}
@@ -94,10 +94,10 @@ class PetCard extends Component {
 class PersonCard extends Component {
   render() {
     const { Username, Text, ImgUrl } = this.props;
-    const { index, statechange } = this.props;
+    const { index, chatting } = this.props;
 
     return (
-      <div id="personCard" onClick={() => statechange({ chatPartner: index })}>
+      <div id="personCard" onClick={() => chatting(index)}>
         <img className="profileImg" alt="home" src={ImgUrl}></img>
         <div className="box">
           <div className="name">{Username}</div>
