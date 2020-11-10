@@ -1,7 +1,13 @@
 * {
   color: black;
   user-select: none;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 #mainpage {
   flex: 1;
   position: relative;

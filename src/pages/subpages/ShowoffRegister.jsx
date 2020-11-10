@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./ShowoffRegister.scss";
+import "./scss/ShowoffRegister.scss";
 import { showoff } from "../../service";
 
 class ShowoffRegister extends Component {

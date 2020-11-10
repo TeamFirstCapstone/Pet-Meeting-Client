@@ -10,6 +10,8 @@ import { user } from "../service";
 import { Route } from "react-router-dom";
 import ShowoffRegister from "./subpages/ShowoffRegister";
 import WorryRegister from "./subpages/WorryRegister";
+import Worry from "./subpages/Worry";
+import Showoff from "./subpages/Showoff";
 
 class MainPage extends Component {
   constructor(props) {
@@ -56,6 +58,9 @@ class MainPage extends Component {
           path={`${match.path}/raise/:eid([0-9]+)`}
           component={Raise}
         />
+        <Route exact path={`${match.path}/worry`} component={Worry} />
+        <Route exact path={`${match.path}/showoff`} component={Showoff} />
+
         <Route
           exact
           path={`${match.path}/showoff/register`}

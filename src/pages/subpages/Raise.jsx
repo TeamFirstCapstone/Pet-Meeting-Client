@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { BASE_URL } from "../../config/url";
 import { entrust, raise } from "../../service";
-import "./Raise.scss";
+import "./scss/Raise.scss";
 
 class Raise extends Component {
   constructor(props) {

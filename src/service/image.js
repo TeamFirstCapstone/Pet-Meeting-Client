@@ -1,4 +1,4 @@
-const { BASE_URL } = require("../config/url");
+const { BASE_URL } = require("../config");
 
 // 모든 것은 ImgUrl로 정한다!
 

@@ -1,4 +1,4 @@
-const { BASE_URL } = require("../config/url");
+const { BASE_URL } = require("../config");
 
 const method = {
   GET: "GET",

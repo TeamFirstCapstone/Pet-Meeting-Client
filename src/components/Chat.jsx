@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BASE_URL } from "../config/url";
 import "./Chat.scss";
 
 class Chat extends Component {
@@ -12,14 +11,7 @@ class Chat extends Component {
 
   closeChat = () => this.props.statechange({ chatPartner: null });
 
-  getChat = () => {
-    fetch(BASE_URL + "/chat/list/" + this.props.partner.UID)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.result);
-        this.setState({ chats: json.result });
-      });
-  };
+  getChat = () => {};
 
   addChat = (chat) => {
     var chats = this.state.chats;

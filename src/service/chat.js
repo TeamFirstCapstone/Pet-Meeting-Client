@@ -1,5 +1,5 @@
 import socketio from "socket.io-client";
-const { BASE_URL } = require("../config/url");
+const { BASE_URL } = require("../config.js");
 
 function connect(uid, addChat) {
   const socket = socketio.connect(BASE_URL);

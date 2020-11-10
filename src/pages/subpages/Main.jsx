@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Main.scss";
+import "./scss/Main.scss";
 import timeSince from "../../service/timeSince";
 import { worry, showoff } from "../../service";
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./WorryRegister.scss";
+import "./scss/WorryRegister.scss";
 import { worry } from "../../service";
 
 class WorryRegister extends Component {

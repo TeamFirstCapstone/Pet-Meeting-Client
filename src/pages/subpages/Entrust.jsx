@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Entrust.scss";
+import "./scss/Entrust.scss";
 import { entrust } from "../../service";
 
 class Entrust extends Component {

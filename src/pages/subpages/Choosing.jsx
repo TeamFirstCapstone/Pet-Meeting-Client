@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import "./Choosing.scss";
-import "./_vertical.scss";
-import "./chart.scss";
+import "./scss/Choosing.scss";
+import "./scss/_vertical.scss";
+import "./scss/chart.scss";
 
 import { entrust } from "../../service";
-import { render } from "@testing-library/react";
 import { Link } from "react-router-dom";
 
 class Choosing extends Component {
