@@ -32,7 +32,7 @@ class Chat extends Component {
 
   render() {
     const { chats, message } = this.state;
-    const { user, partner } = this.props;
+    const { partner } = this.props;
 
     return (
       <div className="chatbox">
@@ -53,7 +53,7 @@ class Chat extends Component {
             <div className="message-box-holder" key={idx}>
               {
                 // Warning이 맞는 거다!
-                chat.writer == partner.UID ? (
+                chat.writer === partner.UID ? (
                   <div className="message-box message-partner">
                     {chat.message}
                   </div>

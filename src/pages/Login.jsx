@@ -9,16 +9,18 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.history = props.history;
     this.state = {
       username: "",
       password: "",
       login_error: "",
     };
-    user.logined().then((status) => this.moveHistory("main"));
   }
 
-  moveHistory = (site) => this.props.hisotry.push(site);
+  componentDidMount = () => {
+    console.log(this.props);
+    user.logined().then((status) => this.props.history.push("main"));
+  };
+
   handlechange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
 
@@ -31,7 +33,7 @@ class Login extends Component {
     else {
       user
         .login({ username, password })
-        .then(() => this.history.push("main"))
+        .then(() => this.props.history.push("main"))
 
         .catch((message) => {
           console.log("Error " + message);
