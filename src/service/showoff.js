@@ -26,13 +26,13 @@ const update = (sid, text, file) =>
 
 // -------------------------------------
 
-const voted = (sid) =>
-  fetchWithMethod(`/${suburl}/voted/${sid}`, method.GET).then(
+const get_vote = (sid) =>
+  fetchWithMethod(`/${suburl}/vote/${sid}`, method.GET).then(
     (json) => json.result
   );
 
-const vote = (sid) =>
-  fetchWithMethod(`/${suburl}/vote/${sid}`, method.GET).then(
+const set_vote = (sid, score) =>
+  fetchWithMethod(`/${suburl}/vote/${sid}`, method.POST, { score }).then(
     (json) => json.result
   );
 
@@ -43,6 +43,6 @@ module.exports = {
   best,
   create,
   update,
-  voted,
-  vote,
+  get_vote,
+  set_vote,
 };

@@ -48,6 +48,17 @@
     margin-bottom: 5vh;
   }
   /*버튼 관련된 css*/
+  .heart {
+    display: flex;
+    margin: 0 10px;
+    border: 1px solid black;
+    .heart_score {
+      margin-left: 6px;
+    }
+    .hearted {
+      color: pink;
+    }
+  }
   .actions {
     display: flex;
     justify-content: space-around;
