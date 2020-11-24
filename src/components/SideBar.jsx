@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./SideBar.scss";
+import renderer from 'react-test-renderer'
 
 class SideBar extends Component {
   static defaultProps = {
