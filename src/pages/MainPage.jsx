@@ -12,6 +12,7 @@ import ShowoffRegister from "./subpages/ShowoffRegister";
 import WorryRegister from "./subpages/WorryRegister";
 import Worry from "./subpages/Worry";
 import Showoff from "./subpages/Showoff";
+import WorryDetail from "./subpages/WorryDetail";
 
 class MainPage extends Component {
   constructor(props) {
@@ -49,7 +50,6 @@ class MainPage extends Component {
     return (
       <div id="main" style={{ display: "flex", height: "100%" }}>
         <SideBar {...profile} chatting={this.chatting} />
-
         <Route exact path={match.url} component={Main} />
         <Route exact path={`${match.path}/entrust`} component={Entrust} />
         <Route exact path={`${match.path}/raise`} component={Choosing} />
@@ -60,7 +60,6 @@ class MainPage extends Component {
         />
         <Route exact path={`${match.path}/worry`} component={Worry} />
         <Route exact path={`${match.path}/showoff`} component={Showoff} />
-
         <Route
           exact
           path={`${match.path}/showoff/register`}
@@ -72,11 +71,16 @@ class MainPage extends Component {
           component={WorryRegister}
         />
 
+        <Route
+          exact
+          path={`${match.path}/worry/:wid([0-9]+)`}
+          component={WorryDetail}
+        />
         {currentChat != null ? (
           <Chat
             user={profile.user}
             partner={currentChat}
-            chatting={this.chatting}
+            statechange={this.statechange}
           />
         ) : null}
       </div>
