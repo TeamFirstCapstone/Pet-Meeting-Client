@@ -5,6 +5,16 @@ const suburl = "entrust";
 
 const list = (offset, limit) => base.list(suburl, offset, limit);
 const get = (eid) => base.get(suburl, eid);
+//js object 
+// const payload = { start, end }
+
+// const doSomething = ({ start }) => { start, end };
+
+// doSomething(payload);
+
+// const doSomthing = ([a, b]) => a + b;
+
+// doSomething([1, 2]);
 
 const create = ({
   text,
