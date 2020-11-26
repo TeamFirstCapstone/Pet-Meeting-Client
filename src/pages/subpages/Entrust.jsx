@@ -27,9 +27,11 @@ class Entrust extends Component {
   }
 
   componentDidMount() {
-    Promise.all([entrust.info(), entrust.pets(0, 10)]).then(([info, pets]) =>
-      this.setState({ info: { ...info, pets } })
-    );
+    Promise.all([entrust.info(), entrust.pets(0, 10)]).then(([info, pets]) => {
+      this.setState({ info: { ...info, pets } });
+
+      console.log(pets);
+    });
   }
 
   handleChange = (e) => {

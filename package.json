@@ -6,10 +6,12 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "firebase": "^8.1.1",
     "fs": "0.0.1-security",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-ga": "^3.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "socket.io-client": "^2.3.1"
