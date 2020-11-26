@@ -1,0 +1,68 @@
+#Worry {
+  overflow-y: scroll;
+  .register {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    font-size: 1.3em;
+    border: 3px solid black;
+    background-color: gray;
+    color: white;
+    padding: 2px;
+    border-radius: 10px;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .viewsIcon-container {
+    display: inline-flex;
+    align-items: flex-end;
+  }
+
+  .worry {
+    margin-top: 30px;
+    margin-left: 40px;
+    font-family: "Roboto";
+
+    p {
+      cursor: pointer;
+    }
+  }
+  .views {
+    width: 70vw;
+    font-family: "Roboto";
+    text-align: left;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+  }
+  .align-items-center {
+    align-items: center;
+  }
+  /*action buttons*/
+  .actions {
+    display: flex;
+    justify-content: space-around;
+
+    /*align-items: flex-end;*/
+  }
+  .actions input {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    border: 1px;
+    background-color: transparent;
+  }
+  ul {
+    list-style: none;
+    font-size: var(--font-medium);
+  }
+  .actions * {
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 30px;
+  }
+}

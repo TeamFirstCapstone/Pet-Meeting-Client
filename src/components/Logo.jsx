@@ -12,8 +12,6 @@ class Logo extends Component {
     };
   }
 
-  submit() {}
-
   render() {
     return (
       <Link to="/" id="logo">

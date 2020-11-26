@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import "./Signup.scss";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { useHistory } from "react-router-dom";
-import { signup, signup_status } from "../services/signup";
+import { user } from "../service";
 
 class Signup extends Component {
   constructor(props) {
@@ -15,6 +14,10 @@ class Signup extends Component {
       phone: "",
       signup_error: "",
     };
+    this.history = props.history;
+    user
+      .logined()
+      .then((status) => (status ? this.history.push("/main") : null));
   }
 
   handlechange = (event) =>
@@ -27,21 +30,22 @@ class Signup extends Component {
     else if (password === "")
       this.setState({ signup_error: "password is null" });
     else {
-      // return result which is one of login_status string
-      signup({username, password, email, phone})
-        .then((result) => {
-          if (result === signup_status.success) {
-            alert("Signup successful");
-            // const history = useHistory();
-            // history.push("/login");
-          } else if (result === signup_status.login_fail) {
-            alert("Login fail check more");
-            this.setState({ signup_error: "login failed" });
-          } else if (result === signup_status.server_error) console.log(result);
+     user
+        .signup({ username, password, email, phone })
+        .then(() => {
+          alert("Signup successfully");
+          this.history.push("/login");
         })
-        .catch((err) => {
-          console.log(err);
-          alert("Server Error!");
+        .catch((message) => {
+          if (message === "User already exists") {
+            alert(message);
+            this.setState({ signup_error: message });
+          } else if (message === "Parameter Error") {
+            // Empty
+          } else {
+            alert("Server Error!");
+            console.log(message);
+          }
         });
     }
   };

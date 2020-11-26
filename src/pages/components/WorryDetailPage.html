@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>WEB1 - HTML</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="WorryDetailPage.css"/>
+</head>
+
+<body>
+    <h1>
+              Worry Detail Page
+    </h1>
+
+
+    
+
+    <!-- <tr>
+        <td>
+            <div class="article-title">Article Title</div>
+            <div class="form-control-title" type="text" name="title" >
+                article title 내용 넣기
+            </div>
+        </td>
+    </tr> -->
+  
+
+   
+    <form class="form-horizontal">
+        <table >
+           
+            <tr>
+               
+                <td>
+                    <div class="article-title">Article </div>
+                    <input class="form-control-title" type="text" name="title" placeholde=""> 
+                </td>
+                
+            </tr>
+    
+            <tr>
+                
+                <td> 
+                    <div class="article-body">Article BOdy</div>
+                    <textarea name="content" class="form-control-body" rows="7" placeholder="write  input text">
+    
+    
+                    </textarea> 
+                </td>
+    
+            </tr>
+        </table>
+    </form>
+ 
+    <!-- wwww.htmlcommentbox.com  플러그인 활용 시작  아마 이 파트는 js안해도 될 듯-->
+    <div id="HCB_comment_box"  style="margin-left: 6vw; height:6vh" >
+        <a href="http://www.htmlcommentbox.com">HTML Comment Box</a>
+        is loading comments...</div>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+    <script type="text/javascript" id="hcb">
+     if (!window.hcb_user) {
+            hcb_user = {};
+        } (function () {
+            var s = document.createElement("script"), l = hcb_user.PAGE || ("" + window.location).replace(/'/g, "%27"), h = "https://www.htmlcommentbox.com";
+             s.setAttribute("type", "text/javascript");
+            s.setAttribute("src", h + "/jread?page=" + encodeURIComponent(l).replace("+", "%2B") + "&mod=%241%24wq1rdBcg%24dHR2YzqJkAI.xkTYk0gIu0" + "&opts=16862&num=10&ts=1604886990908");
+             if (typeof s != "undefined") document.getElementsByTagName("head")[0].appendChild(s);
+        })(); /*-->*/ </script>
+
+</body>
+
+</html>

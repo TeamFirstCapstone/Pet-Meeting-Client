@@ -1,43 +1,33 @@
 import React, { Component } from "react";
-import PersonCard from "./PersonCard";
-import PetCard from "./PetCard";
+import { Link } from "react-router-dom";
 import "./SideBar.scss";
-import { BASE_URL } from "../config/url";
 
 class SideBar extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      id: props.id,
-      user: {},
-      pets: [],
-      chats: [],
-    };
-
-    fetch(BASE_URL + "/profile", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: this.state.id }),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.result);
-        return json.status ? this.setState(json.result) : null;
-      });
-  }
+  static defaultProps = {
+    pets: [],
+    chats: [],
+    user: {
+      ImgUrl: null,
+      Username: "",
+      UID: 0,
+    },
+    chatting: () => {},
+  };
 
   render() {
-    const { user, pets, chats } = this.state;
+    const { pets, chats, user } = this.props;
     return (
       <nav id="sidebar">
         <div className="topbar">
           <i className="fas fa-bars"></i>
-          <div className="title">Pet Meeting</div>
+          <Link className="title" to="/main">
+            Pet Meeting
+          </Link>
         </div>
         <div className="profile">
-          <img className="profileImg" src={user.imgUrl} alt="" />
+          <img className="profileImg" src={user.ImgUrl} alt="" />
           <div className="box">
-            <div className="name">{user.name}</div>
+            <div className="name">{user.Username}</div>
             <div className="setting">
               <div className="profileButton">Profile</div>
               <div className="settingButton">Setting</div>
@@ -50,8 +40,8 @@ class SideBar extends Component {
             <i className="fas fa-plus"></i>
           </div>
           <div className="pets_main">
-            {pets.map((pet) => (
-              <PetCard {...pet}></PetCard>
+            {pets.map((pet, idx) => (
+              <PetCard {...pet} index={idx} key={idx}></PetCard>
             ))}
           </div>
         </div>
@@ -61,12 +51,59 @@ class SideBar extends Component {
             <i className="fas fa-plus"></i>
           </div>
           <div className="chats_main">
-            {chats.map((chat) => (
-              <PersonCard {...chat}></PersonCard>
+            {chats.map((chat, idx) => (
+              <PersonCard
+                chatting={this.props.chatting}
+                {...chat}
+                index={idx}
+                key={idx}
+              ></PersonCard>
             ))}
           </div>
         </div>
       </nav>
+    );
+  }
+}
+
+class PetCard extends Component {
+  render() {
+    const { Name, Year, Gender, Species, ImgUrl } = this.props;
+    return (
+      <div id="petCard">
+        <img className="profileImg" alt="home" src={ImgUrl}></img>
+        <div className="box">
+          <div className="name">{Name}</div>
+          <div className="yeargender">
+            <div className="year">{Year} years old</div>
+            <div className="gender">
+              {Gender === "female" ? (
+                <i className="fas fa-venus female"></i>
+              ) : (
+                <i className="fas fa-mars male"></i>
+              )}
+            </div>
+          </div>
+          <div className="species">{Species}</div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class PersonCard extends Component {
+  render() {
+    const { Username, Text, ImgUrl } = this.props;
+    const { index, chatting } = this.props;
+
+    return (
+      <div id="personCard" onClick={() => chatting(index)}>
+        <img className="profileImg" alt="home" src={ImgUrl}></img>
+        <div className="box">
+          <div className="name">{Username}</div>
+          <div className="text">{Text}</div>
+        </div>
+      </div>
     );
   }
 }

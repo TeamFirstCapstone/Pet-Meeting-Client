@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Risque&display=swap");
+#ShowoffRegister {
+  overflow-y: scroll;
+  .profile-icon {
+    height: 10em;
+    width: 30em;
+    border: 1px solid red;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 200%;
+    font-family: Risque, "san-sarif";
+    margin: auto;
+  }
+
+  .guideline-showoffregister {
+    margin-top: 1vh;
+    margin-left: 50vw;
+    font-size: 1.5em;
+    font-family: Risque, "san-sarif";
+  }
+
+  .article-title {
+    margin-top: 4vh;
+    margin-left: 5vw;
+    width: 80vw;
+    height: 3vh;
+    font-weight: bold;
+    font-size: 2em;
+    font-family: Risque, "san-sarif";
+    margin-bottom: 2vh;
+  }
+  .article-body {
+    font-weight: bold;
+    width: 80vw;
+    margin-left: 5vw;
+    margin-top: 3vh;
+    font-size: 2em;
+    font-family: Risque, "san-sarif";
+  }
+  .form-control-title {
+    margin-left: 5vw;
+    width: 80vw;
+    height: 5vh;
+    border-radius: 16px 16px 16px 16px;
+    font-family: Risque, "san-sarif";
+  }
+  .form-control-body {
+    margin-top: 3vh;
+    margin-left: 5vw;
+    width: 80vw;
+    height: 40vh;
+    border-radius: 16px 16px 16px 16px;
+    font-family: Risque, "san-sarif";
+  }
+  .article-register {
+    width: 10vw;
+    height: 10vh;
+    margin-bottom: 30px;
+    margin-top: 3vh;
+    margin-left: 70vw;
+    font-size: 2em;
+
+    font-family: Risque, "san-sarif";
+  }
+  .btn-register {
+    font-size: 1em;
+    width: 14vw;
+    border-radius: 16px 16px 16px 16px;
+    font-family: Risque, "san-sarif";
+    cursor: pointer;
+  }
+}

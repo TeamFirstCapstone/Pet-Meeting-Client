@@ -1,19 +1,26 @@
 import React, { Component } from "react";
 import "./Login.scss";
-import { login, login_status } from "../services/login";
 import imgBackground from "../images/login_background.png";
 import Logo from "../components/Logo";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { user } from "../service";
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       username: "",
       password: "",
       login_error: "",
     };
   }
+
+  componentDidMount = () => {
+    user.logined().then((status) => {
+      if (status) this.props.history.push("main");
+    });
+  };
 
   handlechange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
@@ -25,20 +32,19 @@ class Login extends Component {
     else if (password === "")
       this.setState({ login_error: "password is null" });
     else {
-      login(username, password)
-        .then((result) => {
-          if (result === login_status.success) {
-            alert("Login successful");
-            // const history = useHistory();
-            // history.push("/main");
-          } else if (result === login_status.login_fail) {
+      user
+        .login({ username, password })
+        .then(() => this.props.history.push("main"))
+
+        .catch((message) => {
+          console.log("Koanmir - Login.jsx - " + message);
+          // Login 틀림
+          if (message === "No User!") {
             this.setState({ login_error: "login failed" });
             alert("Login fail check more");
-          } else if (result === login_status.server_error) console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Server Error!");
+          } else {
+            alert("Server Error!");
+          }
         });
     }
   };
