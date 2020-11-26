@@ -38,7 +38,7 @@ const info = () =>
   fetchWithMethod(`${suburl}/info`, method.GET).then((json) => json.result);
 
 const pets = (offset, limit) =>
-  base.list(`${suburl}/pets`, offset, limit).then((pets) => addImages(pets));
+  base.list(`user/profile`, offset, limit).then(({ pets }) => addImages(pets));
 
 module.exports = {
   list,

@@ -10,11 +10,7 @@ const method = {
 function fetchBase(url, option) {
   return fetch(url, option).then(async (res) => {
     if (res.ok) return res.json();
-    else {
-      if (res.status === 400)
-        throw await res.json().then((error) => error.message);
-      else; // TODO
-    }
+    else throw await res.json().then((error) => error.message);
   });
 }
 
@@ -69,7 +65,10 @@ const list = (url, offset, limit) => {
 };
 
 const get = (suburl, id) =>
-  fetchWithMethod(`${suburl}/${id}`, method.GET).then((json) => json.result);
+  fetchWithMethod(`${suburl}/${id}`, method.GET).then((json) => {
+    console.log(json);
+    return json.result;
+  });
 
 const create = (suburl, body) =>
   fetchWithMethod(`${suburl}`, method.POST, body).then((json) => json.result);
