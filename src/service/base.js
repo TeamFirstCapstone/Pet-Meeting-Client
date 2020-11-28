@@ -1,20 +1,20 @@
-const { BASE_URL } = require("../config");
+import config from "../config";
 
-const method = {
+export const method = {
   GET: "GET",
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE",
 };
 
-function fetchBase(url, option) {
+export function fetchBase(url, option) {
   return fetch(url, option).then(async (res) => {
     if (res.ok) return res.json();
     else throw await res.json().then((error) => error.message);
   });
 }
 
-function fetchWithMethod(url, type, body) {
+export function fetchWithMethod(url, type, body) {
   var option;
   if (type === method.GET)
     option = {
@@ -39,11 +39,11 @@ function fetchWithMethod(url, type, body) {
   else throw new Error("Method type Error");
 
   if (url[0] !== "/") url = "/" + url;
-  return fetchBase(BASE_URL + url, option);
+  return fetchBase(config.BASE_URL + url, option);
 }
 
 // header를 form-data로 안했다
-function fetchWithImage(url, type, body, file) {
+export function fetchWithImage(url, type, body, file) {
   var formData = new FormData();
   for (const name in body) formData.append(name, body[name]);
   formData.append("img", file, file.name);
@@ -54,43 +54,32 @@ function fetchWithImage(url, type, body, file) {
   else if (type === method.PUT) option.method = "PUT";
   else throw new Error("Method type Error");
 
-  return fetchBase(BASE_URL + url, option);
+  return fetchBase(config.BASE_URL + url, option);
 }
 
 // ---------------------------------
 
-const list = (url, offset, limit) => {
+export const list = (url, offset, limit) => {
   const fullUrl = `${url}?limit=${limit}&offset=${offset}`;
   return fetchWithMethod(fullUrl, method.GET).then((json) => json.result);
 };
 
-const get = (suburl, id) =>
+export const get = (suburl, id) =>
   fetchWithMethod(`${suburl}/${id}`, method.GET).then((json) => {
     console.log(json);
     return json.result;
   });
 
-const create = (suburl, body) =>
+export const create = (suburl, body) =>
   fetchWithMethod(`${suburl}`, method.POST, body).then((json) => json.result);
 
-const update = (suburl, id, body) =>
+export const update = (suburl, id, body) =>
   fetchWithMethod(`${suburl}/${id}`, method.PUT, body).then(
     (json) => json.result
   );
 
 // `Delete` is a keyword of Javascript
-const remove = (suburl, id) =>
+export const remove = (suburl, id) =>
   fetchWithMethod(`${suburl}/${id}`, method.DELETE).then((json) => json.result);
 
 // ---------------------------------
-
-module.exports = {
-  method,
-  fetchWithMethod,
-  fetchWithImage,
-  list,
-  get,
-  create,
-  update,
-  remove,
-};

@@ -1,27 +1,27 @@
-const { method, fetchWithMethod } = require("./base");
-const { addImage, addImages } = require("./image");
+import { method, fetchWithMethod } from "./base";
+import { addImage, addImages } from "./image";
 
-function login({ username, password }) {
+export function login({ username, password }) {
   const body = { username, password };
   return fetchWithMethod("/user/login", method.POST, body).then(
     (json) => json.uid
   );
 }
 
-function signup({ username, password, email, phone }) {
+export function signup({ username, password, email, phone }) {
   const body = { username, password, email, phone };
   return fetchWithMethod("/user/singup", method.POST, body).then(
     (json) => json.uid
   );
 }
 
-const logined = () =>
+export const logined = () =>
   fetchWithMethod(`/user/logined`, method.GET).then((json) => json.result);
 
-const logout = () =>
+export const logout = () =>
   fetchWithMethod(`/user/logout`, method.GET).then((json) => json.result);
 
-const profile = () =>
+export const profile = () =>
   fetchWithMethod(`/user/profile`, method.GET)
     .then((json) => json.result)
     .then(({ user, pets, chats }) => {
@@ -35,11 +35,3 @@ const profile = () =>
         }
       );
     });
-
-module.exports = {
-  login,
-  signup,
-  logined,
-  logout,
-  profile,
-};

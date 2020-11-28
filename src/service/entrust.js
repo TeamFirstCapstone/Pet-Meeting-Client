@@ -1,11 +1,12 @@
-const { addImages } = require("./image");
-const base = require("./base");
+import { addImages } from "./image";
+import * as base from "./base";
 const { method, fetchWithMethod } = base;
 const suburl = "entrust";
 
-const list = (offset, limit) => base.list(suburl, offset, limit);
-const get = (eid) => base.get(suburl, eid);
-//js object 
+export const list = (offset, limit) => base.list(suburl, offset, limit);
+export const get = (eid) => base.get(suburl, eid);
+
+//js object
 // const payload = { start, end }
 
 // const doSomething = ({ start }) => { start, end };
@@ -16,7 +17,7 @@ const get = (eid) => base.get(suburl, eid);
 
 // doSomething([1, 2]);
 
-const create = ({
+export const create = ({
   text,
   startDate,
   endDate,
@@ -30,7 +31,7 @@ const create = ({
     ...{ toyPayment, cityId, housings, pets }, // 그냥 보기 좋게 하려고...
   });
 
-const update = (
+export const update = (
   eid,
   { text, startDate, endDate, toyPayment, cityId, housings, pets }
 ) =>
@@ -39,23 +40,13 @@ const update = (
     ...{ toyPayment, cityId, housings, pets }, // 그냥 보기 좋게 하려고...
   });
 
-const remove = (eid) => base.remove(suburl, eid);
+export const remove = (eid) => base.remove(suburl, eid);
 
 // -------------------------------------
 
 // 각 option별 정보가 담겨 있다.
-const info = () =>
+export const info = () =>
   fetchWithMethod(`${suburl}/info`, method.GET).then((json) => json.result);
 
-const pets = (offset, limit) =>
+export const pets = (offset, limit) =>
   base.list(`user/profile`, offset, limit).then(({ pets }) => addImages(pets));
-
-module.exports = {
-  list,
-  get,
-  remove,
-  create,
-  update,
-  info,
-  pets,
-};

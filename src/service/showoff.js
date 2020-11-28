@@ -1,48 +1,38 @@
-const { addImages, addImage } = require("./image");
-const base = require("./base");
-const { method, fetchWithMethod, fetchWithImage } = base;
+import { addImages, addImage } from "./image";
+import * as base from "./base";
+import { method, fetchWithMethod, fetchWithImage } from "./base";
 const suburl = "showoff";
 
-const list = (offset, limit) =>
+export const list = (offset, limit) =>
   base.list(suburl, offset, limit).then((showoffs) => addImages(showoffs));
 
-const get = (sid) => base.get(suburl, sid).then((showoff) => addImage(showoff));
-const remove = (sid) => base.remove(suburl, sid);
+export const get = (sid) =>
+  base.get(suburl, sid).then((showoff) => addImage(showoff));
+export const remove = (sid) => base.remove(suburl, sid);
 
-const best = () =>
+export const best = () =>
   fetchWithMethod(`/${suburl}/best`, method.GET)
     .then((json) => json.result)
     .then((showoff) => addImage(showoff));
 
-const create = (text, file) =>
+export const create = (text, file) =>
   fetchWithImage(`/${suburl}`, method.POST, { text }, file).then(
     (json) => json.result
   );
 
-const update = (sid, text, file) =>
+export const update = (sid, text, file) =>
   fetchWithImage(`/${suburl}/${sid}`, method.PUT, { text }, file).then(
     (json) => json.result
   );
 
 // -------------------------------------
 
-const get_vote = (sid) =>
+export const get_vote = (sid) =>
   fetchWithMethod(`/${suburl}/vote/${sid}`, method.GET).then(
     (json) => json.result
   );
 
-const set_vote = (sid, score) =>
+export const set_vote = (sid, score) =>
   fetchWithMethod(`/${suburl}/vote/${sid}`, method.POST, { score }).then(
     (json) => json.result
   );
-
-module.exports = {
-  list,
-  get,
-  remove,
-  best,
-  create,
-  update,
-  get_vote,
-  set_vote,
-};

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import socketio from "socket.io-client";
-import { BASE_URL } from "../config";
+import config from "../config";
 import "./Chat.scss";
 
 class Chat extends Component {
@@ -11,7 +11,7 @@ class Chat extends Component {
       message: "Type a message",
     };
 
-    this.socket = socketio.connect(BASE_URL);
+    this.socket = socketio.connect(config.BASE_URL);
     this.socket.emit("send_id", { uid: this.props.user.UID });
     this.socket.on("chat", (chat) => {
       chat = JSON.parse(chat);
@@ -36,7 +36,7 @@ class Chat extends Component {
   closeChat = () => this.props.statechange({ currentChat: null });
 
   getChat = () => {
-    fetch(BASE_URL + "/chat/list/" + this.props.partner.UID)
+    fetch(config.BASE_URL + "/chat/list/" + this.props.partner.UID)
       .then((res) => res.json())
       .then((json) => this.setState({ chats: json.result }));
   };
