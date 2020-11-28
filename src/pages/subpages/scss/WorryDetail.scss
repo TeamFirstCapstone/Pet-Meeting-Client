@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Risque&display=swap");
+/* .h1{
+    font-weight: bold;
+    font-size:2em;
+    margin-left:5vw;
+    font-family: Risque, "san-sarif";
+} */
+
+#WorryDetail {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+
+  .form-horizontal {
+    width: 60vw;
+    margin: 0 auto;
+  }
+  .article-title {
+    margin-top: 3vh;
+    font-weight: 400;
+    font-size: 2em;
+    font-family: Risque, "san-sarif";
+    margin-bottom: 2vh;
+  }
+  .article-body {
+    width: 60vw;
+    margin-top: 20px;
+    font-size: 1em;
+    font-family: Risque, "san-sarif";
+  }
+  .title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 40px;
+  }
+  .HCB_comment_box {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: flex-start;
+
+    text-align: start;
+    .box {
+      margin-top: 10px;
+      .name {
+        font-weight: 500;
+        font-size: 1.1em;
+      }
+      .content {
+      }
+    }
+  }
+}

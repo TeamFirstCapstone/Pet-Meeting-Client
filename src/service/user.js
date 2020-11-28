@@ -3,7 +3,7 @@ const { addImage, addImages } = require("./image");
 
 function login({ username, password }) {
   const body = { username, password };
-  return fetchWithMethod("/user/login", method.GET, body).then(
+  return fetchWithMethod("/user/login", method.POST, body).then(
     (json) => json.uid
   );
 }

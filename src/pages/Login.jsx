@@ -17,8 +17,9 @@ class Login extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props);
-    user.logined().then((status) => this.props.history.push("main"));
+    user.logined().then((status) => {
+      if (status) this.props.history.push("main");
+    });
   };
 
   handlechange = (event) =>
@@ -36,7 +37,7 @@ class Login extends Component {
         .then(() => this.props.history.push("main"))
 
         .catch((message) => {
-          console.log("Error " + message);
+          console.log("Koanmir - Login.jsx - " + message);
           // Login 틀림
           if (message === "No User!") {
             this.setState({ login_error: "login failed" });

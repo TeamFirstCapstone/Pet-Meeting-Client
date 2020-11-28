@@ -5,6 +5,16 @@ const suburl = "entrust";
 
 const list = (offset, limit) => base.list(suburl, offset, limit);
 const get = (eid) => base.get(suburl, eid);
+//js object 
+// const payload = { start, end }
+
+// const doSomething = ({ start }) => { start, end };
+
+// doSomething(payload);
+
+// const doSomthing = ([a, b]) => a + b;
+
+// doSomething([1, 2]);
 
 const create = ({
   text,
@@ -38,7 +48,7 @@ const info = () =>
   fetchWithMethod(`${suburl}/info`, method.GET).then((json) => json.result);
 
 const pets = (offset, limit) =>
-  base.list(`${suburl}/pets`, offset, limit).then((pets) => addImages(pets));
+  base.list(`user/profile`, offset, limit).then(({ pets }) => addImages(pets));
 
 module.exports = {
   list,

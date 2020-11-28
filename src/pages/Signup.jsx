@@ -30,7 +30,7 @@ class Signup extends Component {
     else if (password === "")
       this.setState({ signup_error: "password is null" });
     else {
-      user
+     user
         .signup({ username, password, email, phone })
         .then(() => {
           alert("Signup successfully");

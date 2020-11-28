@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./scss/worry.scss";
 import { worry } from "../../service";
+import { Link } from "react-router-dom";
 
 class Worry extends Component {
   constructor(props) {
@@ -21,6 +22,9 @@ class Worry extends Component {
     const { history } = this.props;
     return (
       <div id="Worry">
+        <Link to="worry/register" className="register">
+          Register
+        </Link>
         <div className="flex-container">
           {worries.map((worry, idx) => (
             <article className="worry" key={idx}>
