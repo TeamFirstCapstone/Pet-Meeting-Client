@@ -25,7 +25,10 @@ class Choosing extends Component {
   }
 
   componentDidMount() {
-    entrust.pets(0, 100).then((pets) => this.setState({ pets }));
+    entrust.pets(0, 100).then((pets) => {
+      console.log(pets);
+      this.setState({ pets });
+    });
     entrust.info().then((filteringInfo) => this.setState({ filteringInfo }));
   }
 

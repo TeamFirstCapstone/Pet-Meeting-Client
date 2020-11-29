@@ -49,4 +49,6 @@ export const info = () =>
   fetchWithMethod(`${suburl}/info`, method.GET).then((json) => json.result);
 
 export const pets = (offset, limit) =>
-  base.list(`user/profile`, offset, limit).then(({ pets }) => addImages(pets));
+  base
+    .list(`${suburl}/pets`, offset, limit)
+    .then((result) => addImages(result));

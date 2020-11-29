@@ -61,6 +61,9 @@ class Chat extends Component {
     const { chats, message } = this.state;
     const { user, partner } = this.props;
 
+    console.log(chats);
+    console.log(partner.UID);
+
     return (
       <div className="chatbox">
         <div className="chatbox-top">
@@ -78,13 +81,13 @@ class Chat extends Component {
         <div className="chat-messages">
           {chats.map((chat, idx) => {
             // Warning이 맞는 거다!
-            const isPartener = chat.writer == partner.UID;
+            const isPartener = chat.writer === partner.UID;
 
             return (
               <div className="message-box-holder" key={idx}>
                 <div
                   className={`message-box ${
-                    isPartener ? "message-partner" : null
+                    isPartener ? "message-partner" : ""
                   }`}
                 >
                   {chat.message}
